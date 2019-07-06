@@ -2,3 +2,4 @@
 .vscode/
 mainp
 *.o
+*.hpp.gch
