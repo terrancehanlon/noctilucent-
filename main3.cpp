@@ -1,16 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include "AnimatedSprite.hpp"
 #include <iostream>
-#include "Player.hpp"
 
 int main()
 {
-    //     swinging.setSpriteSheet(texture);
-    // swinging.addFrame(sf::IntRect(0, 0, 48, 48));
-    // swinging.addFrame(sf::IntRect(500, 95, 48, 48));
-    // swinging.addFrame(sf::IntRect(200, 95, 48, 48));
-
-
     // setup window
     sf::Vector2i screenDimensions(800,600);
     sf::RenderWindow window(sf::VideoMode(screenDimensions.x, screenDimensions.y), "Animations!");
@@ -23,33 +16,28 @@ int main()
         std::cout << "Failed to load player spritesheet!" << std::endl;
         return 1;
     }
-    // sf::Sprite sprite;
-    // sprite.setTexture(texture);
-
 
     // set up the animations for all four directions (set spritesheet and push frames)
-    Animation swinging;
-    //key down
-    // swinging.setSpriteSheet(texture);
-    // swinging.addFrame(sf::IntRect(150, 0, 48, 48));
-    // swinging.addFrame(sf::IntRect(190, 0, 48, 48));
-    // // swinging.addFrame(sf::IntRect(230, 0, 48, 48));
-    // swinging.addFrame(sf::IntRect( 0, 0, 48, 48));
+    Animation walkingAnimationDown;
+    walkingAnimationDown.setSpriteSheet(texture);
+    walkingAnimationDown.addFrame(sf::IntRect(32, 0, 32, 32));
+    walkingAnimationDown.addFrame(sf::IntRect(64, 0, 32, 32));
+    walkingAnimationDown.addFrame(sf::IntRect(32, 0, 32, 32));
+    walkingAnimationDown.addFrame(sf::IntRect( 0, 0, 32, 32));
 
     Animation walkingAnimationLeft;
     walkingAnimationLeft.setSpriteSheet(texture);
-    walkingAnimationLeft.addFrame(sf::IntRect(11, 50, 48, 48));
-    walkingAnimationLeft.addFrame(sf::IntRect(57, 50, 48, 48));
-    walkingAnimationLeft.addFrame(sf::IntRect(104, 50, 48, 48));
-    walkingAnimationLeft.addFrame(sf::IntRect( 11, 50, 48, 48));
+    walkingAnimationLeft.addFrame(sf::IntRect(32, 32, 32, 32));
+    walkingAnimationLeft.addFrame(sf::IntRect(64, 32, 32, 32));
+    walkingAnimationLeft.addFrame(sf::IntRect(32, 32, 32, 32));
+    walkingAnimationLeft.addFrame(sf::IntRect( 0, 32, 32, 32));
 
     Animation walkingAnimationRight;
     walkingAnimationRight.setSpriteSheet(texture);
-    walkingAnimationRight.addFrame(sf::IntRect(11, 50, 48, 48));
-    walkingAnimationRight.addFrame(sf::IntRect(57, 50, 48, 48));
-    walkingAnimationRight.addFrame(sf::IntRect(104, 50, 48, 48));
-    walkingAnimationRight.addFrame(sf::IntRect( 11, 50, 48, 48));
-    
+    walkingAnimationRight.addFrame(sf::IntRect(32, 64, 32, 32));
+    walkingAnimationRight.addFrame(sf::IntRect(64, 64, 32, 32));
+    walkingAnimationRight.addFrame(sf::IntRect(32, 64, 32, 32));
+    walkingAnimationRight.addFrame(sf::IntRect( 0, 64, 32, 32));
 
     Animation walkingAnimationUp;
     walkingAnimationUp.setSpriteSheet(texture);
@@ -58,24 +46,16 @@ int main()
     walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
     walkingAnimationUp.addFrame(sf::IntRect( 0, 96, 32, 32));
 
+    Animation* currentAnimation = &walkingAnimationDown;
 
-    Animation* currentAnimation = &swinging;
-
-    // set up AnimatedSprite
-    // AnimatedSprite animatedSprite(sf::seconds(0.2), true, false);
-    // animatedSprite.setPosition(sf::Vector2f(screenDimensions / 2));
+    // sets up AnimatedSprite
+    AnimatedSprite animatedSprite(sf::seconds(0.2), true, false);
+    animatedSprite.setPosition(sf::Vector2f(screenDimensions / 2));
 
     sf::Clock frameClock;
 
-
-
     float speed = 80.f;
     bool noKeyWasPressed = true;
-    bool flipped = false;
-    
-
-    Player pl("name", "dragonBig.png");
-    // window.draw(sprite);
 
     while (window.isOpen())
     {
@@ -94,51 +74,44 @@ int main()
         sf::Vector2f movement(0.f, 0.f);
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            // currentAnimation = &walkingAnimationUp;
-            // movement.y -= speed;
+            currentAnimation = &walkingAnimationUp;
+            movement.y -= speed;
             noKeyWasPressed = false;
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
-            // currentAnimation = &swinging;
-            pl.swing();
-            // movement.y += speed;
+            currentAnimation = &walkingAnimationDown;
+            movement.y += speed;
             noKeyWasPressed = false;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-            if(flipped) pl.ani.scale(-1, 1);    
-            flipped = false;    
-            // currentAnimation = &walkingAnimationLeft;
-            // movement.x -= speed;
+            currentAnimation = &walkingAnimationLeft;
+            movement.x -= speed;
             noKeyWasPressed = false;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
             currentAnimation = &walkingAnimationRight;
-            if(!flipped) pl.ani.scale(-1, 1); 
-            flipped = true;  
             movement.x += speed;
             noKeyWasPressed = false;
         }
-        // animatedSprite.play(*currentAnimation);
-        // animatedSprite.move(movement * frameTime.asSeconds());
+        animatedSprite.play(*currentAnimation);
+        animatedSprite.move(movement * frameTime.asSeconds());
 
         // if no key was pressed stop the animation
         if (noKeyWasPressed)
         {
-            pl.ani.stop();
+            animatedSprite.stop();
         }
         noKeyWasPressed = true;
 
         // update AnimatedSprite
-        // animatedSprite.play(pl->ani);
-        pl.ani.play(pl.swing2);
-        pl.ani.update(frameTime);
+        animatedSprite.update(frameTime);
 
         // draw
         window.clear();
-        window.draw(pl.ani);
+        window.draw(animatedSprite);
         window.display();
     }
 

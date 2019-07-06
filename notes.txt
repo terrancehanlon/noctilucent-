@@ -1,0 +1,1 @@
+AnimatedSprite plays the animation
