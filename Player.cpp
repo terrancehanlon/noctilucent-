@@ -13,7 +13,8 @@ Player::Player(std::string name, std::string path){
     //sets up animations
     setupSwing();
     setUpIdle();
-    // this->ani.play(swing2);
+    idle();
+    // this->ani.play(ani_swing);
 }
 
 Player::Player(){
@@ -32,45 +33,43 @@ void Player::init(){
     // setupSwing();
 }
 
+void Player::setCurrentAnimation(Animation animation){
+    this->currentAnimation = animation;
+}
+
+Animation Player::getCurrentAnimation(){
+    return this->currentAnimation;
+}
+
 void Player::setUpIdle(){
     this->ani_idle.setSpriteSheet(this->texture);
-    this->ani_idle.addFrame(sf::IntRect(16, 9, 26, 37));
-    this->ani_idle.addFrame(sf::IntRect(64, 9, 26, 37));
-    this->ani_idle.addFrame(sf::IntRect(112, 10, 26, 37));
-    this->ani_idle.addFrame(sf::IntRect(160, 10, 26, 36));
+    this->ani_idle.addFrame(sf::IntRect(16, 9, 26, 45));
+    this->ani_idle.addFrame(sf::IntRect(64, 9, 26, 45));
+    this->ani_idle.addFrame(sf::IntRect(112, 10, 26, 45));
+    this->ani_idle.addFrame(sf::IntRect(160, 10, 26, 45));
 
 }
 
-void Player::idle(){
-    this->ani.play(this->ani_idle);
+Animation Player::idle(){
+    // this->ani.play(this->ani_idle);
+    return this->ani_idle;
 }
 
 void Player::setupSwing(){
     Animation swinging;
-    
-    
     //key down  
-    this->swing2.setSpriteSheet(this->texture);
-    this->swing2.addFrame(sf::IntRect(150, 0, 48, 48));
-    this->swing2.addFrame(sf::IntRect(190, 0, 48, 48));
-    // swinging.addFrame(sf::IntRect(230, 0, 48, 48));
-    this->swing2.addFrame(sf::IntRect( 0, 0, 48, 48));
-
+    this->ani_swing.setSpriteSheet(this->texture);
+    this->ani_swing.addFrame(sf::IntRect(14, 96, 25, 45));
+    this->ani_swing.addFrame(sf::IntRect(61, 97, 25, 45));
+    this->ani_swing.addFrame(sf::IntRect(109, 97, 25, 45));
+    this->ani_swing.addFrame(sf::IntRect(157, 97, 24, 45));
+    // swinging.addFrame(sf::IntRect(230, 0, 48, ));
+    this->ani_swing.addFrame(sf::IntRect( 194, 98, 38, 44));
 }
 
 
-void Player::swing(){
-    this->ani.play(this->swing2);
-    // sf::Vector2f movement(0.f, 0.f);
-    // sf::Clock frameClock;
-    // sf::Time frameTime = frameClock.restart();
-    // // std::cout << "also here" << std::endl;
-    // // for(int i = 0; i < animations.size(); i++){
-    // //     if(this->animations.at(i).name == "swing"){
-    // //         this->ani.play(this->animations.at(i).animation);
-    // //         this->ani.move(movement * frameTime.asSeconds());
-    // //     }
-    // // }     
-    // this->ani.play(swing2);
-    // this->ani.move(movement * frameTime.asSeconds());
+Animation Player::swing(){
+    // this->ani.play(this->ani_swing);
+    return this->ani_swing;
+
 }

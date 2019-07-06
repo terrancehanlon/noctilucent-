@@ -51,7 +51,7 @@ int main()
     walkingAnimationRight.addFrame(sf::IntRect( 11, 50, 48, 48));
     
 
-    Animation walkingAnimationUp;
+    Animation walkingAnimationUp;   
     walkingAnimationUp.setSpriteSheet(texture);
     walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
     walkingAnimationUp.addFrame(sf::IntRect(64, 96, 32, 32));
@@ -59,8 +59,7 @@ int main()
     walkingAnimationUp.addFrame(sf::IntRect( 0, 96, 32, 32));
 
 
-    Animation* currentAnimation = &swinging;
-
+    Animation currentAnimation;
     // set up AnimatedSprite
     // AnimatedSprite animatedSprite(sf::seconds(0.2), true, false);
     // animatedSprite.setPosition(sf::Vector2f(screenDimensions / 2));
@@ -76,6 +75,7 @@ int main()
 
     Player pl("name", "dragonBig.png");
     // window.draw(sprite);
+    currentAnimation = pl.idle();
 
     while (window.isOpen())
     {
@@ -101,7 +101,7 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
             // currentAnimation = &swinging;
-            pl.swing();
+            currentAnimation = pl.swing();
             // movement.y += speed;
             noKeyWasPressed = false;
         }
@@ -115,7 +115,7 @@ int main()
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            currentAnimation = &walkingAnimationRight;
+            //currentAnimation = &walkingAnimationRight;
             if(!flipped) pl.ani.scale(-1, 1); 
             flipped = true;  
             movement.x += speed;
@@ -128,13 +128,15 @@ int main()
         if (noKeyWasPressed)
         {
             // pl.ani.stop();
+            currentAnimation = pl.idle();
         }
         noKeyWasPressed = true;
 
         // update AnimatedSprite
         // animatedSprite.play(pl->ani);
-        pl.ani.play(pl.ani_idle);
+        pl.ani.play(currentAnimation);
         pl.ani.update(frameTime);
+        pl.ani.move(movement * frameTime.asSeconds());  
 
         // draw
         window.clear();

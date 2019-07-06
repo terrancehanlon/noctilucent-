@@ -26,18 +26,21 @@ class Player
         std::vector<animation_object> animations;
         void init();
         void setupSwing();
+        Animation ani_swing;
+        Animation ani_idle;
 
     public:
-        Animation swing2;
-        Animation ani_idle;
+        Animation currentAnimation;
         AnimatedSprite ani;
         Player(std::string name, std::string path);
         Player();
         void setHealth(int health);
         int getHealth();
-        void swing();
+        Animation swing();
         void setUpIdle();
-        void idle();
+        Animation idle();
+        void setCurrentAnimation(Animation animation);
+        Animation getCurrentAnimation();
 };
 
 
