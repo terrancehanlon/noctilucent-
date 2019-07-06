@@ -15,7 +15,7 @@ class Player
 {
     struct animation_object {
     std::string name;
-    Animation animation;
+    sf::Texture texture;
 };
 
     private:
@@ -30,7 +30,7 @@ class Player
     public:
         Animation swing2;
         AnimatedSprite ani;
-        Player(std::string name, sf::Texture texture);
+        Player(std::string name, std::string path);
         Player();
         void setHealth(int health);
         int getHealth();

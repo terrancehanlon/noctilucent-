@@ -23,18 +23,18 @@ int main()
         std::cout << "Failed to load player spritesheet!" << std::endl;
         return 1;
     }
-    sf::Sprite sprite;
-    sprite.setTexture(texture);
+    // sf::Sprite sprite;
+    // sprite.setTexture(texture);
 
 
     // set up the animations for all four directions (set spritesheet and push frames)
     Animation swinging;
     //key down
-    swinging.setSpriteSheet(texture);
-    swinging.addFrame(sf::IntRect(150, 0, 48, 48));
-    swinging.addFrame(sf::IntRect(190, 0, 48, 48));
-    // swinging.addFrame(sf::IntRect(230, 0, 48, 48));
-    swinging.addFrame(sf::IntRect( 0, 0, 48, 48));
+    // swinging.setSpriteSheet(texture);
+    // swinging.addFrame(sf::IntRect(150, 0, 48, 48));
+    // swinging.addFrame(sf::IntRect(190, 0, 48, 48));
+    // // swinging.addFrame(sf::IntRect(230, 0, 48, 48));
+    // swinging.addFrame(sf::IntRect( 0, 0, 48, 48));
 
     Animation walkingAnimationLeft;
     walkingAnimationLeft.setSpriteSheet(texture);
@@ -62,8 +62,8 @@ int main()
     Animation* currentAnimation = &swinging;
 
     // set up AnimatedSprite
-    AnimatedSprite animatedSprite(sf::seconds(0.2), true, false);
-    animatedSprite.setPosition(sf::Vector2f(screenDimensions / 2));
+    // AnimatedSprite animatedSprite(sf::seconds(0.2), true, false);
+    // animatedSprite.setPosition(sf::Vector2f(screenDimensions / 2));
 
     sf::Clock frameClock;
 
@@ -72,9 +72,10 @@ int main()
     float speed = 80.f;
     bool noKeyWasPressed = true;
     bool flipped = false;
-    animatedSprite.scale(2.0, 2.0);
+    
 
-    Player pl("name", texture);
+    Player pl("name", "dragonBig.png");
+    // window.draw(sprite);
 
     while (window.isOpen())
     {
@@ -93,50 +94,51 @@ int main()
         sf::Vector2f movement(0.f, 0.f);
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            currentAnimation = &walkingAnimationUp;
-            movement.y -= speed;
+            // currentAnimation = &walkingAnimationUp;
+            // movement.y -= speed;
             noKeyWasPressed = false;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
             // currentAnimation = &swinging;
-            
+            pl.swing();
             // movement.y += speed;
             noKeyWasPressed = false;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-            if(flipped) animatedSprite.scale(-1, 1);    
+            if(flipped) pl.ani.scale(-1, 1);    
             flipped = false;    
-            currentAnimation = &walkingAnimationLeft;
-            movement.x -= speed;
+            // currentAnimation = &walkingAnimationLeft;
+            // movement.x -= speed;
             noKeyWasPressed = false;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
             currentAnimation = &walkingAnimationRight;
-            if(!flipped) animatedSprite.scale(-1, 1); 
+            if(!flipped) pl.ani.scale(-1, 1); 
             flipped = true;  
             movement.x += speed;
             noKeyWasPressed = false;
         }
-        animatedSprite.play(*currentAnimation);
-        animatedSprite.move(movement * frameTime.asSeconds());
+        // animatedSprite.play(*currentAnimation);
+        // animatedSprite.move(movement * frameTime.asSeconds());
 
         // if no key was pressed stop the animation
         if (noKeyWasPressed)
         {
-            animatedSprite.stop();
+            pl.ani.stop();
         }
         noKeyWasPressed = true;
 
         // update AnimatedSprite
         // animatedSprite.play(pl->ani);
-        animatedSprite.update(frameTime);
+        pl.ani.play(pl.swing2);
+        pl.ani.update(frameTime);
 
         // draw
         window.clear();
-        window.draw(animatedSprite);
+        window.draw(pl.ani);
         window.display();
     }
 
