@@ -127,13 +127,13 @@ int main()
         // if no key was pressed stop the animation
         if (noKeyWasPressed)
         {
-            pl.ani.stop();
+            // pl.ani.stop();
         }
         noKeyWasPressed = true;
 
         // update AnimatedSprite
         // animatedSprite.play(pl->ani);
-        pl.ani.play(pl.swing2);
+        pl.ani.play(pl.ani_idle);
         pl.ani.update(frameTime);
 
         // draw

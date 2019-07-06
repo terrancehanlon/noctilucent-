@@ -29,12 +29,15 @@ class Player
 
     public:
         Animation swing2;
+        Animation ani_idle;
         AnimatedSprite ani;
         Player(std::string name, std::string path);
         Player();
         void setHealth(int health);
         int getHealth();
         void swing();
+        void setUpIdle();
+        void idle();
 };
 
 

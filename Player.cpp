@@ -12,6 +12,7 @@ Player::Player(std::string name, std::string path){
     
     //sets up animations
     setupSwing();
+    setUpIdle();
     // this->ani.play(swing2);
 }
 
@@ -29,6 +30,19 @@ int Player::getHealth(){
 
 void Player::init(){
     // setupSwing();
+}
+
+void Player::setUpIdle(){
+    this->ani_idle.setSpriteSheet(this->texture);
+    this->ani_idle.addFrame(sf::IntRect(16, 9, 26, 37));
+    this->ani_idle.addFrame(sf::IntRect(64, 9, 26, 37));
+    this->ani_idle.addFrame(sf::IntRect(112, 10, 26, 37));
+    this->ani_idle.addFrame(sf::IntRect(160, 10, 26, 36));
+
+}
+
+void Player::idle(){
+    this->ani.play(this->ani_idle);
 }
 
 void Player::setupSwing(){
