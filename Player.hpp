@@ -26,8 +26,11 @@ class Player
         std::vector<animation_object> animations;
         void init();
         void setupSwing();
+        void setUpIdle();
+        void setUpWalk();
         Animation ani_swing;
         Animation ani_idle;
+        Animation ani_walk;
 
     public:
         Animation currentAnimation;
@@ -36,9 +39,9 @@ class Player
         Player();
         void setHealth(int health);
         int getHealth();
-        Animation swing();
-        void setUpIdle();
+        Animation swing(); 
         Animation idle();
+        Animation walk();
         void setCurrentAnimation(Animation animation);
         Animation getCurrentAnimation();
 };

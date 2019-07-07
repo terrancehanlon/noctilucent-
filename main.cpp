@@ -109,8 +109,8 @@ int main()
         {
             if(flipped) pl.ani.scale(-1, 1);    
             flipped = false;    
-            // currentAnimation = &walkingAnimationLeft;
-            // movement.x -= speed;
+            currentAnimation = pl.walk();
+            movement.x -= speed;
             noKeyWasPressed = false;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -118,6 +118,7 @@ int main()
             //currentAnimation = &walkingAnimationRight;
             if(!flipped) pl.ani.scale(-1, 1); 
             flipped = true;  
+            currentAnimation = pl.walk();
             movement.x += speed;
             noKeyWasPressed = false;
         }
