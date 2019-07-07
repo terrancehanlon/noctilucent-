@@ -74,6 +74,8 @@ int main()
     
 
     Player pl("name", "dragonBig.png");
+    Player pl2("name2", "dragonBig.png");
+    pl2.ani.setColor(sf::Color::Red);
     // window.draw(sprite);
     currentAnimation = pl.idle();
 
@@ -92,6 +94,7 @@ int main()
 
         // if a key was pressed set the correct animation and move correctly
         sf::Vector2f movement(0.f, 0.f);
+        sf::Vector2f movement2(0.f, 0.f);
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
             // currentAnimation = &walkingAnimationUp;
@@ -138,10 +141,22 @@ int main()
         pl.ani.play(currentAnimation);
         pl.ani.update(frameTime);
         pl.ani.move(movement * frameTime.asSeconds());  
+        
 
+        pl2.ani.play(pl2.idle());           
+
+        if( pl.ani.getGlobalBounds().intersects(pl2.ani.getGlobalBounds()) ){
+            std::cout << "COLLISION" << std::endl;
+        }
+        else{
+            std::cout << "NO COLLISION" << std::endl;
+        }
+
+        
         // draw
         window.clear();
         window.draw(pl.ani);
+        window.draw(pl2.ani);
         window.display();
     }
 
