@@ -23,6 +23,13 @@ int main()
         std::cout << "Failed to load player spritesheet!" << std::endl;
         return 1;
     }
+
+    sf::Texture intro;
+    intro.loadFromFile("assets/sky.png", sf::IntRect(0,0, screenDimensions.x, screenDimensions.y));
+    sf::Sprite sprite;
+    sprite.setTexture(intro);
+    sprite.setScale(screenDimensions.x / sprite.getLocalBounds().width, screenDimensions.y / sprite.getLocalBounds().height);
+    // sprite.setPosition(sf::Vector2f(screenDimensions.x, screenDimensions.y));
     // sf::Sprite sprite;
     // sprite.setTexture(texture);
 
@@ -97,8 +104,8 @@ int main()
         sf::Vector2f movement2(0.f, 0.f);
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            // currentAnimation = &walkingAnimationUp;
-            // movement.y -= speed;
+            currentAnimation = pl.walk();
+            movement.y -= speed;
             noKeyWasPressed = false;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -137,26 +144,29 @@ int main()
         noKeyWasPressed = true;
 
         // update AnimatedSprite
-        // animatedSprite.play(pl->ani);
+        // animatedSprite.play(pl->ani);    
         pl.ani.play(currentAnimation);
         pl.ani.update(frameTime);
         pl.ani.move(movement * frameTime.asSeconds());  
+
         
 
         pl2.ani.play(pl2.idle());           
 
         if( pl.ani.getGlobalBounds().intersects(pl2.ani.getGlobalBounds()) ){
-            std::cout << "COLLISION" << std::endl;
+            // std::cout << "COLLISION" << std::endl;
         }
         else{
-            std::cout << "NO COLLISION" << std::endl;
+            // std::cout << "NO COLLISION" << std::endl;
         }
 
         
         // draw
         window.clear();
+        window.draw(sprite);
         window.draw(pl.ani);
         window.draw(pl2.ani);
+        
         window.display();
     }
 
