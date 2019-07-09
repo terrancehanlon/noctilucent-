@@ -1,7 +1,8 @@
 #include <SFML/Graphics.hpp>
-#include "AnimatedSprite.hpp"
+#include "../lib/AnimatedSprite.hpp"
+// #include "lib/AnimatedSprite.hpp"
 #include <iostream>
-#include "Player.hpp"
+#include "../entities/headers/Player.hpp"
 
 int main()
 {
@@ -25,10 +26,20 @@ int main()
     }
 
     sf::Texture intro;
+    sf::Texture road_intro;
+
     intro.loadFromFile("assets/sky.png", sf::IntRect(0,0, screenDimensions.x, screenDimensions.y));
+    road_intro.loadFromFile("assets/road.png", sf::IntRect(0,0, screenDimensions.x, screenDimensions.y));
+    
     sf::Sprite sprite;
+    sf::Sprite road;
+    
     sprite.setTexture(intro);
+    road.setTexture(road_intro);
+    
+
     sprite.setScale(screenDimensions.x / sprite.getLocalBounds().width, screenDimensions.y / sprite.getLocalBounds().height);
+    road.setScale(screenDimensions.x / sprite.getLocalBounds().width, screenDimensions.y / sprite.getLocalBounds().height);
     // sprite.setPosition(sf::Vector2f(screenDimensions.x, screenDimensions.y));
     // sf::Sprite sprite;
     // sprite.setTexture(texture);
@@ -164,8 +175,9 @@ int main()
         // draw
         window.clear();
         window.draw(sprite);
+        window.draw(road);
         window.draw(pl.ani);
-        window.draw(pl2.ani);
+        // window.draw(pl2.ani);
         
         window.display();
     }

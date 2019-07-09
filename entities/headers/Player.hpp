@@ -3,7 +3,7 @@
 
 #include <string>
 #include <SFML/Graphics.hpp>
-#include "AnimatedSprite.hpp"
+#include "../../lib/AnimatedSprite.hpp"
 #include <vector>
 
 // struct animation_object {

@@ -1,4 +1,4 @@
-#include "Player.hpp"
+#include "../headers/Player.hpp"
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <iostream>
