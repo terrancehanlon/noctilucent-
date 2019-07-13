@@ -6,6 +6,7 @@
 #include "./levelManagement/levels/base/LevelManager.hpp"
 #include "./levelManagement/levels/base/LevelEngine.hpp"
 #include "./levelManagement/levels/level1/LevelOne.hpp"
+#include "./levelManagement/levels/level2/LevelTwo.hpp"
 
 
 int main()
@@ -20,11 +21,10 @@ enum GameState{
 };
 
     GameState gameState = GameState::Intro;
+    Level currentLevel;
     LevelOne levelone("name");
+    LevelTwo leveltwo("name");
     LevelManager levelManger;
-    
-
-    
 
 
     // setup window
@@ -44,29 +44,10 @@ enum GameState{
         return 1;
     }
 
-    sf::Texture intro;
-    sf::Texture road_intro;
-
-    intro.loadFromFile("assets/sky.png", sf::IntRect(0,0, screenDimensions.x, screenDimensions.y));
-    road_intro.loadFromFile("assets/road.png", sf::IntRect(0,0, screenDimensions.x, screenDimensions.y));
-    
-    sf::Sprite sprite;
-    sf::Sprite road;
-    
-    sprite.setTexture(intro);
-    road.setTexture(road_intro);
-    
-
-    sprite.setScale(screenDimensions.x / sprite.getLocalBounds().width, screenDimensions.y / sprite.getLocalBounds().height);
-    road.setScale(screenDimensions.x / sprite.getLocalBounds().width, screenDimensions.y / sprite.getLocalBounds().height);
-
-
     Animation currentAnimation;
     sf::Clock frameClock;
 
-
-
-    float speed = 80.f;
+    float speed = 180.f;
     bool noKeyWasPressed = true;
     bool flipped = false;
     
@@ -74,11 +55,12 @@ enum GameState{
 
     Player pl("name", "dragonBig.png");
     Player pl2("name2", "dragonBig.png");
-    pl.ani.setPosition(5, screenDimensions.y - 150);
+    pl.setPosition(5, screenDimensions.y - 150);
     pl2.ani.setColor(sf::Color::Red);
     // window.draw(sprite);
     currentAnimation = pl.idle();
-    sf::Sprite sp = levelone.getImages().at(0);
+    // sf::Sprite sp = levelone.getImages().at(0);
+    currentLevel = levelone;
     while (window.isOpen())
     {
 
@@ -145,7 +127,15 @@ enum GameState{
 
         
 
-        pl2.ani.play(pl2.idle());           
+        pl2.ani.play(pl2.idle());     
+
+        if(pl.ani.getPosition().x > screenDimensions.x){
+            std::cout << "Player off screen" << std::endl;
+            currentLevel = leveltwo;
+            pl.setPosition(5, screenDimensions.y - 150);
+        }else{
+            std::cout << "Player on screen" << std::endl;
+        }      
 
         if( pl.ani.getGlobalBounds().intersects(pl2.ani.getGlobalBounds()) ){
             // std::cout << "COLLISION" << std::endl;
@@ -157,7 +147,8 @@ enum GameState{
         
         // draw
         window.clear();
-        window.draw(sprite);
+        levelManger.drawLevel(currentLevel, window);
+        // window.draw(sprite);
         // window.draw(road);
 
         

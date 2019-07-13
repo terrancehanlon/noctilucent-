@@ -20,6 +20,7 @@ class Player
 
     private:
         int health;
+        sf::Sprite avatar;
         std::string name;
         sf::Texture texture;
         Animation animation;
@@ -33,6 +34,8 @@ class Player
         Animation ani_walk;
 
     public:
+        void setPosition(float x, float y);
+        sf::Sprite drawPlayer();
         Animation currentAnimation;
         AnimatedSprite ani;
         Player(std::string name, std::string path);

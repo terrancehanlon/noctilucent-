@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 Player::Player(std::string name, std::string path){
+
     this->name = name;
     this->texture.loadFromFile(path);
     //sets up sprite
@@ -19,12 +20,22 @@ Player::Player(std::string name, std::string path){
     // this->ani.play(ani_swing);
 }
 
+// void Player::drawPlayer(){
+//     sf::Texture texture;
+//     texture.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/sky.png",  sf::IntRect(0,0, 800, 600));
+//     this->avatar.setTexture(texture);
+// }
+
 Player::Player(){
     this->name = "";
 }
 
 void Player::setHealth(int health){
     this->health = health;
+}
+
+void Player::setPosition(float x, float y){
+    this->ani.setPosition(sf::Vector2f(x, y));
 }
 
 int Player::getHealth(){

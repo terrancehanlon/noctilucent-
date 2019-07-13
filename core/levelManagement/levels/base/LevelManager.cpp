@@ -18,7 +18,7 @@ void LevelManager::setLevelStack(std::stack<Level> levelStack){
 }
 
 
-void LevelManager::drawLevel(Level level, sf::RenderWindow window){
+void LevelManager::drawLevel(Level level, sf::RenderWindow &window){
     for(int i = 0; i < level.getImages().size(); i++){
         // sf::Sprite sprite = level.getImages().at(i);
         window.draw(level.getImages().at(i));

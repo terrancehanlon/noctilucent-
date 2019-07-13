@@ -1,4 +1,4 @@
-    #ifndef LEVELONE_INCLUDE
+#ifndef LEVELONE_INCLUDE
 #define LEVELONE_INCLUDE
 
 
@@ -8,11 +8,13 @@
 
 class LevelOne : public Level{
     private:
-        sf::Texture texture1;
+        sf::Texture sky;
+        sf::Texture road;
 
     public:
         LevelOne(std::string name);
-        void setUpTextures();
+        void setSprites();
+        void setTextures();
 };
 
 #endif

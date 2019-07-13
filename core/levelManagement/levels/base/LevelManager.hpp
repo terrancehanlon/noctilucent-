@@ -13,7 +13,7 @@ class LevelManager {
         LevelManager();
         std::stack<Level> getLevelStack();
         void setLevelStack(std::stack<Level> levelStack);
-        void drawLevel(Level level, sf::RenderWindow window);
+        void drawLevel(Level level, sf::RenderWindow &window);
         
 };
 

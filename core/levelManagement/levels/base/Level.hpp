@@ -17,7 +17,7 @@ class Level{
         Level();
         Level(std::string name);
         std::vector<sf::Sprite> getImages(); 
-        void addImage(sf::Sprite sprite);   
+        void addImage(sf::Sprite sprite);
         
 
 };
