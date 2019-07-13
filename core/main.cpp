@@ -1,21 +1,40 @@
 #include <SFML/Graphics.hpp>
 #include "../lib/AnimatedSprite.hpp"
-// #include "lib/AnimatedSprite.hpp"
+#include "../lib/AnimatedSprite.hpp"
 #include <iostream>
 #include "../entities/headers/Player.hpp"
+#include "./levelManagement/levels/base/LevelManager.hpp"
+#include "./levelManagement/levels/base/LevelEngine.hpp"
+#include "./levelManagement/levels/level1/LevelOne.hpp"
+
 
 int main()
 {
-    //     swinging.setSpriteSheet(texture);
-    // swinging.addFrame(sf::IntRect(0, 0, 48, 48));
-    // swinging.addFrame(sf::IntRect(500, 95, 48, 48));
-    // swinging.addFrame(sf::IntRect(200, 95, 48, 48));
+
+enum GameState{
+    Intro,
+    Running,
+    Pause,
+    Death,
+    End
+};
+
+    GameState gameState = GameState::Intro;
+    LevelOne levelone("name");
+    LevelManager levelManger;
+    
+
+    
 
 
     // setup window
     sf::Vector2i screenDimensions(800,600);
+    
+    sf::RenderWindow *win;
     sf::RenderWindow window(sf::VideoMode(screenDimensions.x, screenDimensions.y), "Animations!");
     window.setFramerateLimit(60);
+
+    // LevelEngine engine(win);
 
     // load texture (spritesheet)
     sf::Texture texture;
@@ -40,48 +59,9 @@ int main()
 
     sprite.setScale(screenDimensions.x / sprite.getLocalBounds().width, screenDimensions.y / sprite.getLocalBounds().height);
     road.setScale(screenDimensions.x / sprite.getLocalBounds().width, screenDimensions.y / sprite.getLocalBounds().height);
-    // sprite.setPosition(sf::Vector2f(screenDimensions.x, screenDimensions.y));
-    // sf::Sprite sprite;
-    // sprite.setTexture(texture);
-
-
-    // set up the animations for all four directions (set spritesheet and push frames)
-    Animation swinging;
-    //key down
-    // swinging.setSpriteSheet(texture);
-    // swinging.addFrame(sf::IntRect(150, 0, 48, 48));
-    // swinging.addFrame(sf::IntRect(190, 0, 48, 48));
-    // // swinging.addFrame(sf::IntRect(230, 0, 48, 48));
-    // swinging.addFrame(sf::IntRect( 0, 0, 48, 48));
-
-    Animation walkingAnimationLeft;
-    walkingAnimationLeft.setSpriteSheet(texture);
-    walkingAnimationLeft.addFrame(sf::IntRect(11, 50, 48, 48));
-    walkingAnimationLeft.addFrame(sf::IntRect(57, 50, 48, 48));
-    walkingAnimationLeft.addFrame(sf::IntRect(104, 50, 48, 48));
-    walkingAnimationLeft.addFrame(sf::IntRect( 11, 50, 48, 48));
-
-    Animation walkingAnimationRight;
-    walkingAnimationRight.setSpriteSheet(texture);
-    walkingAnimationRight.addFrame(sf::IntRect(11, 50, 48, 48));
-    walkingAnimationRight.addFrame(sf::IntRect(57, 50, 48, 48));
-    walkingAnimationRight.addFrame(sf::IntRect(104, 50, 48, 48));
-    walkingAnimationRight.addFrame(sf::IntRect( 11, 50, 48, 48));
-    
-
-    Animation walkingAnimationUp;   
-    walkingAnimationUp.setSpriteSheet(texture);
-    walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
-    walkingAnimationUp.addFrame(sf::IntRect(64, 96, 32, 32));
-    walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
-    walkingAnimationUp.addFrame(sf::IntRect( 0, 96, 32, 32));
 
 
     Animation currentAnimation;
-    // set up AnimatedSprite
-    // AnimatedSprite animatedSprite(sf::seconds(0.2), true, false);
-    // animatedSprite.setPosition(sf::Vector2f(screenDimensions / 2));
-
     sf::Clock frameClock;
 
 
@@ -90,15 +70,18 @@ int main()
     bool noKeyWasPressed = true;
     bool flipped = false;
     
+    bool init = true;
 
     Player pl("name", "dragonBig.png");
     Player pl2("name2", "dragonBig.png");
+    pl.ani.setPosition(5, screenDimensions.y - 150);
     pl2.ani.setColor(sf::Color::Red);
     // window.draw(sprite);
     currentAnimation = pl.idle();
-
+    sf::Sprite sp = levelone.getImages().at(0);
     while (window.isOpen())
     {
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -175,7 +158,11 @@ int main()
         // draw
         window.clear();
         window.draw(sprite);
-        window.draw(road);
+        // window.draw(road);
+
+        
+        // window.draw(levelone->getImages().at(0));
+
         window.draw(pl.ani);
         // window.draw(pl2.ani);
         
