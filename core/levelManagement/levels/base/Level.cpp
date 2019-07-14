@@ -19,3 +19,7 @@ Level::Level(){
 Level::Level(std::string name){
 
 }
+
+std::vector<Dummy> Level::getEntities(){
+    return this->entities;
+};

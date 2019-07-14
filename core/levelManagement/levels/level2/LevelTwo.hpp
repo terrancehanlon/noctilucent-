@@ -15,6 +15,7 @@ class LevelTwo : public Level{
         LevelTwo(std::string name);
         void setSprites();
         void setTextures();
+        void setEnemies();
 };
 
 #endif

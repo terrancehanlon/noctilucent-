@@ -3,7 +3,7 @@
 #include "LevelTwo.hpp"
 // #include <SFML/Graphics"
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
 void LevelTwo::setTextures(){
     // this->sky.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/sky.png",  sf::IntRect(0,0, 800, 600));
     this->road.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/sky.png",sf::IntRect(0,0, 800, 600));
@@ -25,7 +25,16 @@ LevelTwo::LevelTwo(std::string nameOfLevel){
     Level(name);
     // skySprite.setTexture(this->sky);
     // sf::Sprite skySprite;
+    std::cout <<"level two" <<std::endl;
     // sf::Sprite road;
     this->setTextures();
     this->setSprites();
+    this->setEnemies();
 }   
+
+void LevelTwo::setEnemies(){
+    std::cout <<"creating dummy" <<std::endl;
+    Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 150, 150);
+    this->entities.push_back(dummy);
+    std::cout <<this->entities.size() <<std::endl;
+}

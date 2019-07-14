@@ -23,7 +23,7 @@ enum GameState{
     GameState gameState = GameState::Intro;
     Level currentLevel;
     LevelOne levelone("name");
-    LevelTwo leveltwo("name");
+                LevelTwo leveltwo("name");
     LevelManager levelManger;
 
 
@@ -55,10 +55,12 @@ enum GameState{
 
     Player pl("name", "dragonBig.png");
     Player pl2("name2", "dragonBig.png");
+    //Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 150, 150);
     pl.setPosition(5, screenDimensions.y - 150);
     pl2.ani.setColor(sf::Color::Red);
     // window.draw(sprite);
     currentAnimation = pl.idle();
+    
     // sf::Sprite sp = levelone.getImages().at(0);
     currentLevel = levelone;
     while (window.isOpen())
@@ -127,14 +129,21 @@ enum GameState{
 
         
 
-        pl2.ani.play(pl2.idle());     
+
+        //dummy.ani.play(dummy.walk());
+        //dummy.ani.update(frameTime);
+        // dummy.ani.move(movement * frameTime.asSeconds());  
+
+        
+
+        
 
         if(pl.ani.getPosition().x > screenDimensions.x){
-            std::cout << "Player off screen" << std::endl;
+            // std::cout << "Player off screen" << std::endl;
             currentLevel = leveltwo;
             pl.setPosition(5, screenDimensions.y - 150);
         }else{
-            std::cout << "Player on screen" << std::endl;
+            // std::cout << "Player on screen" << std::endl;
         }      
 
         if( pl.ani.getGlobalBounds().intersects(pl2.ani.getGlobalBounds()) ){
@@ -154,7 +163,8 @@ enum GameState{
         
         // window.draw(levelone->getImages().at(0));
 
-        window.draw(pl.ani);
+        // window.draw(pl.ani);
+        // window.draw(dummy.ani);
         // window.draw(pl2.ani);
         
         window.display();

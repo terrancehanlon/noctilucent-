@@ -2,7 +2,7 @@
 #include "./Level.hpp"
 
 #include <stack>
-
+#include <iostream>
 
 LevelManager::LevelManager(){
     std::stack<Level> levelStack;
@@ -22,6 +22,11 @@ void LevelManager::drawLevel(Level level, sf::RenderWindow &window){
     for(int i = 0; i < level.getImages().size(); i++){
         // sf::Sprite sprite = level.getImages().at(i);
         window.draw(level.getImages().at(i));
+    }
+
+    for(int i = 0; i < level.getEntities().size(); i++){
+        // std::cout << level.getEntities().size() << std::endl    ;
+        window.draw(level.getEntities().at(i).ani);
     }
 }
 

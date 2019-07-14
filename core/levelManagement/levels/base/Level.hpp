@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "/home/terrance/Desktop/games2/noctilucent-/lib/AnimatedSprite.hpp"
 #include <vector>
+#include "../../../../entities/headers/Dummy.hpp"
 
 class Level{
 
@@ -13,11 +14,13 @@ class Level{
 
     public:
         std::vector<sf::Sprite> images;
+        std::vector<Dummy> entities;
         std::string getLevelTitle();
         Level();
         Level(std::string name);
         std::vector<sf::Sprite> getImages(); 
         void addImage(sf::Sprite sprite);
+        std::vector<Dummy> getEntities();
         
 
 };
