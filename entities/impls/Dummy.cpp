@@ -6,11 +6,11 @@
 Dummy::Dummy(std::string name, std::string path, float startX, float startY){
     this->name = name;
     this->texture.loadFromFile(path);
-
     this->ani = AnimatedSprite(sf::seconds(0.2), true, false);
     this->ani.setPosition(sf::Vector2f(startX, startY));
     this->ani.scale(2.0,2.0);
     this->setUpWalk();
+    this->setTexture(texture);
 
 }
 
@@ -30,4 +30,12 @@ void Dummy::setUpWalk(){
 
 Animation Dummy::walk(){
     return this->ani_walk;
+}
+
+void Dummy::setTexture(sf::Texture text){
+    this->texture = text;
+}
+
+sf::Texture Dummy::getTexture(){
+    return this->texture;
 }

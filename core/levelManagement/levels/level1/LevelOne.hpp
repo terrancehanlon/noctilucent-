@@ -12,7 +12,7 @@ class LevelOne : public Level{
         sf::Texture road;
 
     public:
-        LevelOne(std::string name);
+        LevelOne();
         void setSprites();
         void setTextures();
 };

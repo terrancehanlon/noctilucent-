@@ -7,3 +7,8 @@ a level consists of mulitple textures that hold the images.
 Texture is set onto a sprite which the sprite is drawn by the window
 
 LevelX inherits from level and sets up all textures based on that level
+
+Player contains animation and animated sprite. The animated sprite plays the animation.
+Ani_Sprite player;
+Animation theAnimation;
+player.play(animation)

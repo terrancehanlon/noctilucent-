@@ -7,7 +7,8 @@
 void LevelTwo::setTextures(){
     // this->sky.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/sky.png",  sf::IntRect(0,0, 800, 600));
     this->road.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/sky.png",sf::IntRect(0,0, 800, 600));
-};  
+    this->character.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", sf::IntRect(0, 0, 10, 10));
+}  
 
 void LevelTwo::setSprites(){
     // sf::Sprite skySprite;
@@ -21,8 +22,8 @@ void LevelTwo::setSprites(){
 
 }
 
-LevelTwo::LevelTwo(std::string nameOfLevel){
-    Level(name);
+LevelTwo::LevelTwo(){
+    Level("level two");
     // skySprite.setTexture(this->sky);
     // sf::Sprite skySprite;
     std::cout <<"level two" <<std::endl;
@@ -35,6 +36,16 @@ LevelTwo::LevelTwo(std::string nameOfLevel){
 void LevelTwo::setEnemies(){
     std::cout <<"creating dummy" <<std::endl;
     Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 150, 150);
-    this->entities.push_back(dummy);
+    dummy.ani.play(dummy.walk());
+    this->addEntitiy(dummy.ani);
+    // this->entities.push_back(dummy);
     std::cout <<this->entities.size() <<std::endl;
+}
+
+sf::Texture LevelTwo::getTexture(){
+    return this->character;
+}
+
+void LevelTwo::setTexture(sf::Texture texture){
+    this->character = texture;
 }

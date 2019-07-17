@@ -26,7 +26,7 @@ void LevelManager::drawLevel(Level level, sf::RenderWindow &window){
 
     for(int i = 0; i < level.getEntities().size(); i++){
         // std::cout << level.getEntities().size() << std::endl    ;
-        window.draw(level.getEntities().at(i).ani);
+        window.draw(level.getEntities().at(i));
     }
 }
 

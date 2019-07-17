@@ -20,8 +20,8 @@ void LevelOne::setSprites(){
 
 }
 
-LevelOne::LevelOne(std::string nameOfLevel){
-    Level(name);
+LevelOne::LevelOne(){
+    Level("level one");
     // skySprite.setTexture(this->sky);
     // sf::Sprite skySprite;
     // sf::Sprite road;

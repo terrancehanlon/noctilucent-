@@ -3,10 +3,11 @@
 #include "../lib/AnimatedSprite.hpp"
 #include <iostream>
 #include "../entities/headers/Player.hpp"
-#include "./levelManagement/levels/base/LevelManager.hpp"
-#include "./levelManagement/levels/base/LevelEngine.hpp"
-#include "./levelManagement/levels/level1/LevelOne.hpp"
-#include "./levelManagement/levels/level2/LevelTwo.hpp"
+#include "levelManagement/levels/base/LevelManager.hpp"
+#include "levelManagement/levels/base/LevelEngine.hpp"
+#include "levelManagement/levels/level1/LevelOne.hpp"
+#include "levelManagement/levels/level2/LevelTwo.hpp"
+#include <vector>
 
 
 int main()
@@ -20,13 +21,17 @@ enum GameState{
     End
 };
 
+    std::vector<sf::Texture> textures;
+    std::vector<Dummy> dummies;
+    sf::Texture text;
     GameState gameState = GameState::Intro;
     Level currentLevel;
-    LevelOne levelone("name");
-                LevelTwo leveltwo("name");
+    LevelOne levelone;
+    LevelTwo leveltwo;
     LevelManager levelManger;
 
-
+    textures.push_back(leveltwo.getTexture());
+    text = leveltwo.getTexture();
     // setup window
     sf::Vector2i screenDimensions(800,600);
     
@@ -54,10 +59,10 @@ enum GameState{
     bool init = true;
 
     Player pl("name", "dragonBig.png");
-    Player pl2("name2", "dragonBig.png");
+    // Player pl2("name2", "dragonBig.png");
     //Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 150, 150);
     pl.setPosition(5, screenDimensions.y - 150);
-    pl2.ani.setColor(sf::Color::Red);
+    // pl2.ani.setColor(sf::Color::Red);
     // window.draw(sprite);
     currentAnimation = pl.idle();
     
@@ -116,7 +121,7 @@ enum GameState{
         // if no key was pressed stop the animation
         if (noKeyWasPressed)
         {
-            // pl.ani.stop();
+            pl.ani.stop();
             currentAnimation = pl.idle();
         }
         noKeyWasPressed = true;
@@ -146,12 +151,12 @@ enum GameState{
             // std::cout << "Player on screen" << std::endl;
         }      
 
-        if( pl.ani.getGlobalBounds().intersects(pl2.ani.getGlobalBounds()) ){
-            // std::cout << "COLLISION" << std::endl;
-        }
-        else{
-            // std::cout << "NO COLLISION" << std::endl;
-        }
+        // if( pl.ani.getGlobalBounds().intersects(pl2.ani.getGlobalBounds()) ){
+        //     // std::cout << "COLLISION" << std::endl;
+        // }
+        // else{
+        //     // std::cout << "NO COLLISION" << std::endl;
+        // }
 
         
         // draw
@@ -163,7 +168,7 @@ enum GameState{
         
         // window.draw(levelone->getImages().at(0));
 
-        // window.draw(pl.ani);
+        window.draw(pl.ani);
         // window.draw(dummy.ani);
         // window.draw(pl2.ani);
         

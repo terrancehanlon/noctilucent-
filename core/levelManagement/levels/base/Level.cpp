@@ -20,6 +20,10 @@ Level::Level(std::string name){
 
 }
 
-std::vector<Dummy> Level::getEntities(){
+std::vector<AnimatedSprite> Level::getEntities(){
     return this->entities;
 };
+
+void Level::addEntitiy(AnimatedSprite dummy){
+    this->entities.push_back(dummy);
+}
