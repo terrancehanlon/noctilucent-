@@ -32,6 +32,7 @@ class Player
         Animation ani_swing;
         Animation ani_idle;
         Animation ani_walk;
+    
 
     public:
         void setPosition(float x, float y);
@@ -47,6 +48,7 @@ class Player
         Animation walk();
         void setCurrentAnimation(Animation animation);
         Animation getCurrentAnimation();
+        void display(sf::RenderWindow &window);
 };
 
 

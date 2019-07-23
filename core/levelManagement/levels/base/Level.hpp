@@ -14,14 +14,14 @@ class Level{
 
     public:
         std::vector<sf::Sprite> images;
-        std::vector<AnimatedSprite> entities;
+        std::vector<Dummy> entities;
         std::string getLevelTitle();
         Level();
         Level(std::string name);
         std::vector<sf::Sprite> getImages(); 
         void addImage(sf::Sprite sprite);
-        std::vector<AnimatedSprite> getEntities();
-        void addEntitiy(AnimatedSprite dummy);
+        std::vector<Dummy> getEntities();
+        void addEntitiy(Dummy dummy);
         
 
 };

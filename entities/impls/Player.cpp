@@ -25,6 +25,9 @@ Player::Player(std::string name, std::string path){
 //     texture.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/sky.png",  sf::IntRect(0,0, 800, 600));
 //     this->avatar.setTexture(texture);
 // }
+void Player::display(sf::RenderWindow &window){
+    window.draw(this->ani);
+}
 
 Player::Player(){
     this->name = "";
@@ -83,7 +86,7 @@ void Player::setUpWalk  (){
     std::cout << "Setting up walk" << std::endl;
 
     this->ani_walk.setSpriteSheet(this->texture);
-    // this->ani_walk.addFrame(sf::IntRect(16, 9, 26, 37));
+    this->ani_walk.addFrame(sf::IntRect(16, 9, 26, 37));
     this->ani_walk.addFrame(sf::IntRect(16, 61, 25, 33));
     this->ani_walk.addFrame(sf::IntRect(60, 60, 29, 33));
     this->ani_walk.addFrame(sf::IntRect(107, 59, 32, 35));

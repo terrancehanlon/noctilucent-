@@ -7,19 +7,25 @@
 #include <vector>
 
 class LevelTwo : public Level{
+    Dummy dummy;
     private:
         sf::Texture sky;
         sf::Texture road;
         sf::Texture character;
+        TextureManager tm;
+        
         // vector<Dummy> 
 
     public:
-        LevelTwo(std::vector<Dummy> dummies);
+        LevelTwo(sf::Texture dummy, sf::Texture background, TextureManager tm);
+        void displayEnemies(sf::RenderWindow &window);
         void setSprites();
-        void setTextures();
-        void setEnemies();
+        void setTextures(sf::Texture texture);
+        void setEnemies(sf::Texture texutre, TextureManager tm);
         sf::Texture getTexture();
-        void setTexture(sf::Texture texture);
+        void setTexture(const sf::Texture& texture);
+        void setDummy(Dummy dummy);
+        void draw(sf::RenderWindow &window);
 };
 
 #endif

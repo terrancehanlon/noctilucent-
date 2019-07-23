@@ -1,5 +1,4 @@
 AnimatedSprite plays the animation
-
 texture.loadFromFile(path) 
 sprite.setTexture(texture)
 
