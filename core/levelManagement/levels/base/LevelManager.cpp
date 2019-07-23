@@ -26,9 +26,8 @@ void LevelManager::drawLevel(Level level, sf::RenderWindow &window){
 
     for(int i = 0; i < level.getEntities().size(); i++){
         // std::cout << level.getEntities().size() << std::endl;
-        AnimatedSprite ani = level.getEntities().at(i).ani;
-        ani.play(level.getEntities().at(i).walk());
-        window.draw(ani);
+        level.getEntities().at(i).ani.play(level.getEntities().at(i).walk());
+        window.draw(level.getEntities().at(i).ani);
     }
 }
 

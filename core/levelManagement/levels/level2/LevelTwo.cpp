@@ -44,9 +44,9 @@ LevelTwo::LevelTwo(sf::Texture texture, sf::Texture background, TextureManager t
 
 void LevelTwo::setEnemies(sf::Texture texture, TextureManager textMan){
     std::cout <<"creating dummy" <<std::endl;
-    Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 150, 150, textMan);
+    Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 250, 150, textMan);
     // setTexture(dummy.getTexture());
-    dummy.ani.play(dummy.walk());
+    // dummy.ani.play(dummy.walk());
     this->addEntitiy(dummy);
     this->setDummy(dummy);
     // this->entities.push_back(dummy);
@@ -77,7 +77,8 @@ void LevelTwo::draw(sf::RenderWindow &window){
     // std::cout << std::to_string(this->tm.length());
     Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 150, 150, this->tm);
     dummy.ani.play(dummy.walk());
-    window.draw(dummy.ani);
+    // window.draw(dummy.ani);
+    // Level::draw(window);
     // sf::Sprite road;
     // road.setTexture(this->sky);
     // road.setScale(800 / road.getLocalBounds().width, 600/ road.getLocalBounds().height);

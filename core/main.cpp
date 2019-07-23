@@ -204,7 +204,7 @@ enum GameState{
 
         pl.display(window);
         window.draw(dm.ani);
-        leveltwo.draw(window);
+        currentLevel.draw(window);
         // dummy.display(window);
         // window.draw(dummy.ani);
         // window.draw(pl2.ani);
