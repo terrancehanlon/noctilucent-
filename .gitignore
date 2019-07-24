@@ -3,3 +3,4 @@
 mainp
 *.o
 *.hpp.gch
+API/dialogue/node_modules
