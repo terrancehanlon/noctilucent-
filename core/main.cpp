@@ -9,7 +9,15 @@
 #include "levelManagement/levels/level2/LevelTwo.hpp"
 #include <vector>
 #include "TextureManager.hpp"
+#include <curl/curl.h>
+#include <string>
 
+
+static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
+{
+    ((std::string*)userp)->append((char*)contents, size * nmemb);
+    return size * nmemb;
+}
 
 int main()
 {
@@ -89,6 +97,30 @@ enum GameState{
     Dummy dm("name", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 10, 10, tm);
     dummyAnimation = dm.walk();
     dm.ani.play(dummyAnimation);
+
+  CURL *curl;
+  CURLcode res;
+ 
+  curl = curl_easy_init();
+  if(curl) {
+    curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:4567/frank-says");
+    /* example.com is redirected, so we tell libcurl to follow redirection */ 
+    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+ 
+    /* Perform the request, res will get the return code */ 
+    res = curl_easy_perform(curl);
+    // std::cout << "hererere" << std::endl;
+    std::cout <<res << std::endl;
+    /* Check for errors */ 
+    if(res != CURLE_OK)
+      fprintf(stderr, "curl_easy_perform() failed: %s\n",
+              curl_easy_strerror(res));
+ 
+    /* always cleanup */ 
+    curl_easy_cleanup(curl);
+  }
+
+
 
     while (window.isOpen())
     {
@@ -203,8 +235,10 @@ enum GameState{
         // window.draw(levelone->getImages().at(0));
 
         pl.display(window);
+        leveltwo.draw(window);
         window.draw(dm.ani);
-        currentLevel.draw(window);
+        // leveltwo.draw(window);
+        // currentLevel.draw(window, leveltwo.getEnemies());
         // dummy.display(window);
         // window.draw(dummy.ani);
         // window.draw(pl2.ani);

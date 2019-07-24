@@ -28,12 +28,12 @@ void Level::addEntitiy(Dummy dummy){
     this->entities.push_back(dummy);
 }
 
-void Level::draw(sf::RenderWindow &window){
+void Level::draw(sf::RenderWindow &window, std::vector<Dummy> enemies){
     // std::cout << std::to_string(this->tm.length());
     // Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 150, 150, this->tm);
-    if(entities.size() > 0){
-    entities.at(0).ani.play(entities.at(0).walk());
-    window.draw(entities.at(0).ani);
+    if(enemies.size() > 0){
+    enemies.at(0).ani.play(enemies.at(0).walk());
+    window.draw(enemies.at(0).ani);
     }
     // sf::Sprite road;
     // road.setTexture(this->sky);

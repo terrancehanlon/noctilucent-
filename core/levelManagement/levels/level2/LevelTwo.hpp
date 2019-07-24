@@ -26,6 +26,7 @@ class LevelTwo : public Level{
         void setTexture(const sf::Texture& texture);
         void setDummy(Dummy dummy);
         void draw(sf::RenderWindow &window);
+        std::vector<Dummy> getEnemies();
 };
 
 #endif

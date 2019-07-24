@@ -22,7 +22,7 @@ class Level{
         void addImage(sf::Sprite sprite);
         std::vector<Dummy> getEntities();
         void addEntitiy(Dummy dummy);
-        void draw(sf::RenderWindow &window);
+        void draw(sf::RenderWindow &window, std::vector<Dummy> enemies);
 
 };
 

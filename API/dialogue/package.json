@@ -1,0 +1,22 @@
+{
+  "name": "dialogue",
+  "version": "1.0.0",
+  "description": "Dialogue API for noctilucent game",
+  "main": "dialogue.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/terrancehanlon/noctilucent-.git"
+  },
+  "author": "Terrance Hanlon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/terrancehanlon/noctilucent-/issues"
+  },
+  "homepage": "https://github.com/terrancehanlon/noctilucent-#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

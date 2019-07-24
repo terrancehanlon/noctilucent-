@@ -44,7 +44,7 @@ LevelTwo::LevelTwo(sf::Texture texture, sf::Texture background, TextureManager t
 
 void LevelTwo::setEnemies(sf::Texture texture, TextureManager textMan){
     std::cout <<"creating dummy" <<std::endl;
-    Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 250, 150, textMan);
+    Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 250, 150, this->tm);
     // setTexture(dummy.getTexture());
     // dummy.ani.play(dummy.walk());
     this->addEntitiy(dummy);
@@ -74,14 +74,38 @@ void LevelTwo::setDummy(Dummy dummy){
 }
 
 void LevelTwo::draw(sf::RenderWindow &window){
+    sf::Text text;
+    sf::Font font;
+    font.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/arial.ttf");
+    text.setFont(font);
+    text.setString("Test");
+    text.setCharacterSize(24);
+    text.move(100.f, 100.f);
+    window.draw(text);
     // std::cout << std::to_string(this->tm.length());
-    Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 150, 150, this->tm);
+    Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 200, 150, this->tm);
+    // dummy.ani.play(dummy.walk())
+    std::vector<Dummy> dummies;
+    // dummies.push_back(dummy);
+    entities.push_back(dummy);
+    // Level::draw(window, dummies);
+    // std::cout << std::to_string(entities.size());
+    // entities.at(0).ani.play(entities.at(0).walk());
     dummy.ani.play(dummy.walk());
-    // window.draw(dummy.ani);
+    window.draw(dummy.ani);
+    // window.draw(entities.at(0).ani);
+    // Level::draw(window);
     // Level::draw(window);
     // sf::Sprite road;
     // road.setTexture(this->sky);
     // road.setScale(800 / road.getLocalBounds().width, 600/ road.getLocalBounds().height);
     // window.draw(road);
     // window.draw(dummy.ani);
+}
+
+std::vector<Dummy> LevelTwo::getEnemies(){
+     Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 150, 150, this->tm);
+    // dummy.ani.play(dummy.walk())
+    std::vector<Dummy> dummies;
+    return dummies;
 }

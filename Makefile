@@ -13,7 +13,7 @@ all:
 
 main:
 		g++ -std=c++11 -c core/main.cpp -o target/main.o;
-		g++ target/Animation.o target/AnimatedSprite.o target/Player.o target/Dummy.o target/main.o target/level.o target/levelManager.o target/levelOne.o target/levelTwo.o target/texuremanager.o -o mainp -lsfml-graphics -lsfml-window -lsfml-system;
+		g++ target/Animation.o target/AnimatedSprite.o target/Player.o target/Dummy.o target/main.o target/level.o target/levelManager.o target/levelOne.o target/levelTwo.o target/texuremanager.o -o mainp -lcurl -lsfml-graphics -lsfml-window -lsfml-system;
 entity:
 		g++ -std=c++11 -c entities/impls/Player.cpp -Ientities/headers/Player.hpp -o target/Player.o;
 		g++ -std=c++11 -c entities/impls/Dummy.cpp -Ientities/headers/Dummy.hpp -o target/Dummy.o;
