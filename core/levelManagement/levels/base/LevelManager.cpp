@@ -4,7 +4,8 @@
 #include <stack>
 #include <iostream>
 
-LevelManager::LevelManager(){
+LevelManager::LevelManager(TextureManager tm){
+    this->tm = tm;
     std::stack<Level> levelStack;
     this->levelStack = levelStack;
 }
@@ -19,15 +20,31 @@ void LevelManager::setLevelStack(std::stack<Level> levelStack){
 
 
 void LevelManager::drawLevel(Level level, sf::RenderWindow &window){
+    std::cout << level.getLevelTitle() << std::endl;
     for(int i = 0; i < level.getImages().size(); i++){
         // sf::Sprite sprite = level.getImages().at(i);
         window.draw(level.getImages().at(i));
     }
 
-    for(int i = 0; i < level.getEntities().size(); i++){
-        // std::cout << level.getEntities().size() << std::endl;
-        level.getEntities().at(i).ani.play(level.getEntities().at(i).walk());
-        window.draw(level.getEntities().at(i).ani);
+    // for(int i = 0; i < level.getEntities().size(); i++){
+    //     // std::cout << dummy.<< std::endl;
+    //     Dummy dummy = level.getEntities().at(i);
+    //     dummy.ani.play(dummy.walk());
+    //     window.draw(dummy.ani);
+    // }
+    // std::cout << "ENEMY TYPE COUNT: " + std::to_string(level.getEnemyTypeCount()) << std::endl;
+    if(level.getEnemyTypeCount() > 0){
+        
+        for(int i = 0; i < level.getEnemyTypes().size(); i++){
+            if(level.getEnemyTypes().at(i).typeName.compare("dummy") == 0){
+                for(int j = 0; j < level.getEnemyTypes().at(i).count; j++){
+                    std::cout << "DRAWING ENEMY" << std::endl;
+                    Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 250, 150, this->tm);
+                    dummy.ani.play(dummy.walk());
+                    window.draw(dummy.ani);
+                }
+            }
+        }
     }
 }
 

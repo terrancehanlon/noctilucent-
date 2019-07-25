@@ -14,6 +14,7 @@ class LevelTwo : public Level{
         sf::Texture character;
         TextureManager tm;
         
+        
         // vector<Dummy> 
 
     public:

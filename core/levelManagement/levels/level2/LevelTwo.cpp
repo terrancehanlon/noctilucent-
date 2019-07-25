@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 void LevelTwo::setTextures(sf::Texture texture){
-    this->sky.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/sky.png",  sf::IntRect(0,0, 800, 600));
+    this->sky.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/road-road.png",  sf::IntRect(0,0, 800, 600));
     // texture.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/sky.png",sf::IntRect(0,0, 800, 600));
     // this->road = texture;
     // texture.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", sf::IntRect(0, 0, 10, 10));
@@ -28,11 +28,18 @@ void LevelTwo::setSprites(){
 }
 
 LevelTwo::LevelTwo(sf::Texture texture, sf::Texture background, TextureManager tm){
-    Level("level two");
+    std::vector<Level::EnemyInfo> enemyTypes;
+    EnemyInfo enemyInfo;
+    enemyInfo.typeName = "dummy";
+    enemyInfo.count = 1;
+    enemyTypes.push_back(enemyInfo);
     this->tm = tm;  
+    Level("level two", enemyTypes);
+    this->setLevelTitle("Level two");
+    this->setEnemyTypes(enemyTypes);
     // skySprite.setTexture(this->sky);
     // sf::Sprite skySprite;
-    std::cout <<"level two" <<std::endl;
+    // std::cout <<"level two" <<std::endl;
     // sf::Sprite road;
     // this->setTextures(background);
     // this->sky = background;
@@ -80,7 +87,7 @@ void LevelTwo::draw(sf::RenderWindow &window){
     text.setFont(font);
     text.setString("Test");
     text.setCharacterSize(24);
-    text.move(100.f, 100.f);
+    text.move(100.f, 100.f);    
     window.draw(text);
     // std::cout << std::to_string(this->tm.length());
     Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 200, 150, this->tm);

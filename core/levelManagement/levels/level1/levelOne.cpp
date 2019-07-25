@@ -21,7 +21,10 @@ void LevelOne::setSprites(){
 }
 
 LevelOne::LevelOne(){
-    Level("level one");
+    std::vector<Level::EnemyInfo> enemyTypes;
+    Level("level one", enemyTypes);
+    this->setLevelTitle("level one");
+    this->setEnemyTypes(enemyTypes);
     // skySprite.setTexture(this->sky);
     // sf::Sprite skySprite;
     // sf::Sprite road;

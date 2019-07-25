@@ -51,7 +51,7 @@ enum GameState{
     Level currentLevel;
     LevelOne levelone;
     LevelTwo leveltwo(dummyTexture, backGround, tm);
-    LevelManager levelManger;
+    LevelManager levelManger(tm);
 
     // textures.push_back(leveltwo.getTexture());
     // text = leveltwo.getTexture();
@@ -182,29 +182,9 @@ enum GameState{
         }
         noKeyWasPressed = true;
 
-        // update AnimatedSprite
-        // animatedSprite.play(pl->ani);    
-        // players.at(0).ani.play (currentAnimation);
         pl.ani.play(currentAnimation);
         pl.ani.update(frameTime);
-        // dm.ani.update(frameTime);
         pl.ani.move(movement * frameTime.asSeconds());
-        
-        // dummy.ani.play(dummyAnimation);
-        // dummy.ani.update(frameTime);
-        
-        //  players.at(0).ani.update(frameTime);
-        //  players.at(0).ani.move(movement * frameTime.asSeconds());  
-
-        
-
-
-        //dummy.ani.play(dummy.walk());
-        //dummy.ani.update(frameTime);
-        // dummy.ani.move(movement * frameTime.asSeconds());  
-
-        
-
         
 
         if(pl.ani.getPosition().x > screenDimensions.x){
@@ -235,7 +215,7 @@ enum GameState{
         // window.draw(levelone->getImages().at(0));
 
         pl.display(window);
-        leveltwo.draw(window);
+        // leveltwo.draw(window);
         window.draw(dm.ani);
         // leveltwo.draw(window);
         // currentLevel.draw(window, leveltwo.getEnemies());

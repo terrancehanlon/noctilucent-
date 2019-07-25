@@ -1,5 +1,6 @@
 #include "Level.hpp"
 #include <vector>
+#include <iostream>
 
 
 
@@ -16,8 +17,10 @@ Level::Level(){
 
 }
 
-Level::Level(std::string name){
-
+Level::Level(std::string name, std::vector<Level::EnemyInfo> enemyTypes){
+this->levelTitle = name;
+this->enemieTypes = enemyTypes;
+std::cout << this->levelTitle + " type size in level construct " + std::to_string(enemyTypes.size()) << std::endl;
 }
 
 std::vector<Dummy> Level::getEntities(){
@@ -26,6 +29,14 @@ std::vector<Dummy> Level::getEntities(){
 
 void Level::addEntitiy(Dummy dummy){
     this->entities.push_back(dummy);
+}
+
+int Level::getEnemyTypeCount(){
+    return this->enemieTypes.size();
+}
+
+std::vector<Level::EnemyInfo> Level::getEnemyTypes(){
+    return this->enemieTypes;
 }
 
 void Level::draw(sf::RenderWindow &window, std::vector<Dummy> enemies){
@@ -40,4 +51,16 @@ void Level::draw(sf::RenderWindow &window, std::vector<Dummy> enemies){
     // road.setScale(800 / road.getLocalBounds().width, 600/ road.getLocalBounds().height);
     // window.draw(road);
     // window.draw(dummy.ani);
+}
+
+std::string Level::getLevelTitle(){
+    return this->levelTitle;
+}
+
+void Level::setLevelTitle(std::string levelTitle){
+    this->levelTitle = levelTitle;
+}
+
+void Level::setEnemyTypes(std::vector<EnemyInfo> info){
+    this->enemieTypes = info;
 }
