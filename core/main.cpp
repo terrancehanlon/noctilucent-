@@ -80,7 +80,7 @@ enum GameState{
     bool init = true;
 
     std::vector<Player> players;
-    Player pl("name", "dragonBig.png");
+    Player pl("name", "/home/terrance/Desktop/games2/noctilucent-/assets/nockt.png");
     // Dummy dm("name", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 100, 100, tm);
     // players.push_back(pl);
     // players.at(0).se
@@ -120,8 +120,9 @@ enum GameState{
     curl_easy_cleanup(curl);
   }
 
+    bool steady = true;
 
-
+    // pl.ani.play(pl.lay());
     while (window.isOpen())
     {
         // dummy.display(window);
@@ -142,7 +143,7 @@ enum GameState{
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
             currentAnimation = pl.walk();
-            movement.y -= speed;
+            // movement.y -= speed;
             noKeyWasPressed = false;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -154,6 +155,10 @@ enum GameState{
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
+            if(!steady){
+                pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y - 50);
+                steady = !steady;
+            }
             if(flipped) pl.ani.scale(-1, 1);    
             flipped = false;    
             currentAnimation = pl.walk();
@@ -163,6 +168,10 @@ enum GameState{
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
             //currentAnimation = &walkingAnimationRight;
+            if(!steady){
+                pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y - 50);
+                steady = !steady;
+            }
             if(!flipped) pl.ani.scale(-1, 1); 
             flipped = true;  
             currentAnimation = pl.walk();
@@ -176,7 +185,12 @@ enum GameState{
         if (noKeyWasPressed)
         {
             pl.ani.stop();
-            currentAnimation = pl.idle();
+            if(steady){
+            pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y + 50);
+            steady = !steady;
+            }
+            
+            currentAnimation = pl.lay();
             // dummyAnimation = dummy.walk();
             
         }
@@ -185,6 +199,7 @@ enum GameState{
         pl.ani.play(currentAnimation);
         pl.ani.update(frameTime);
         pl.ani.move(movement * frameTime.asSeconds());
+        levelone.moveSky(movement * frameTime.asSeconds()); 
         
 
         if(pl.ani.getPosition().x > screenDimensions.x){

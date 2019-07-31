@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 void LevelTwo::setTextures(sf::Texture texture){
-    this->sky.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/road-road.png",  sf::IntRect(0,0, 800, 600));
+    this->sky.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/road-no-tree-with-sky.png",  sf::IntRect(0,0, 800, 600));
     // texture.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/sky.png",sf::IntRect(0,0, 800, 600));
     // this->road = texture;
     // texture.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", sf::IntRect(0, 0, 10, 10));

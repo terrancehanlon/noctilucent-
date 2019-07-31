@@ -11,13 +11,14 @@ void LevelOne::setTextures(){
 void LevelOne::setSprites(){
     sf::Sprite skySprite;
     sf::Sprite road;
+    
     skySprite.setTexture(this->sky);
     road.setTexture(this->road);
     skySprite.setScale(800 / skySprite.getLocalBounds().width, 600/ skySprite.getLocalBounds().height);
     road.setScale(800 / road.getLocalBounds().width, 600/ road.getLocalBounds().height);
     this->addImage(skySprite);
     this->addImage(road);
-
+    this->skySprite = skySprite;
 }
 
 LevelOne::LevelOne(){
@@ -31,3 +32,7 @@ LevelOne::LevelOne(){
     this->setTextures();
     this->setSprites();
 }   
+
+void LevelOne::moveSky( sf::Vector2f movement){
+    this->skySprite.move(movement);
+}

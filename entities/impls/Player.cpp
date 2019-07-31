@@ -16,6 +16,7 @@ Player::Player(std::string name, std::string path){
     setupSwing();
     setUpIdle();
     setUpWalk();
+    setUpLay();
     idle();
     // this->ani.play(ani_swing);
 }
@@ -82,11 +83,25 @@ void Player::setupSwing(){
     this->ani_swing.addFrame(sf::IntRect( 194, 98, 38, 44));
 }
 
+void Player::setUpLay(){
+    this->ani_lay.setSpriteSheet(this->texture);
+    this->ani_lay.addFrame(sf::IntRect(6, 178, 39, 12));
+    this->ani_lay.addFrame(sf::IntRect(57, 168, 35, 22));
+    this->ani_lay.addFrame(sf::IntRect(108, 159, 27, 31));
+    this->ani_lay.addFrame(sf::IntRect(157, 159, 26, 31));
+    this->ani_lay.addFrame(sf::IntRect(205, 159, 26, 31));
+    this->ani_lay.addFrame(sf::IntRect(253, 159, 26, 31));
+    this->ani_lay.addFrame(sf::IntRect(301, 159, 26, 31));
+    this->ani_lay.addFrame(sf::IntRect(351, 157, 23, 33));
+    this->ani_lay.addFrame(sf::IntRect(16, 61, 25, 33));
+
+}
+
 void Player::setUpWalk  (){
     std::cout << "Setting up walk" << std::endl;
 
     this->ani_walk.setSpriteSheet(this->texture);
-    this->ani_walk.addFrame(sf::IntRect(16, 9, 26, 37));
+    // this->ani_walk.addFrame(sf::IntRect(16, 9, 26, 37));
     this->ani_walk.addFrame(sf::IntRect(16, 61, 25, 33));
     this->ani_walk.addFrame(sf::IntRect(60, 60, 29, 33));
     this->ani_walk.addFrame(sf::IntRect(107, 59, 32, 35));
@@ -95,6 +110,10 @@ void Player::setUpWalk  (){
     this->ani_walk.addFrame(sf::IntRect(249, 60, 31, 32));
     this->ani_walk.addFrame(sf::IntRect(296, 59, 31, 35));
     this->ani_walk.addFrame(sf::IntRect(345, 59, 31, 35));
+}
+
+Animation Player::lay(){
+    return this->ani_lay;
 }
 
 Animation Player::walk(){

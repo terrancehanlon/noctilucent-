@@ -38,7 +38,6 @@ void LevelManager::drawLevel(Level level, sf::RenderWindow &window){
         for(int i = 0; i < level.getEnemyTypes().size(); i++){
             if(level.getEnemyTypes().at(i).typeName.compare("dummy") == 0){
                 for(int j = 0; j < level.getEnemyTypes().at(i).count; j++){
-                    std::cout << "DRAWING ENEMY" << std::endl;
                     Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 250, 150, this->tm);
                     dummy.ani.play(dummy.walk());
                     window.draw(dummy.ani);

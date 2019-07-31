@@ -4,3 +4,4 @@ mainp
 *.o
 *.hpp.gch
 API/dialogue/node_modules
+API/flask/config.py

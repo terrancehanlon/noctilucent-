@@ -29,6 +29,8 @@ class Player
         void setupSwing();
         void setUpIdle();
         void setUpWalk();
+        void setUpLay();
+        Animation ani_lay;
         Animation ani_swing;
         Animation ani_idle;
         Animation ani_walk;
@@ -46,6 +48,7 @@ class Player
         Animation swing(); 
         Animation idle();
         Animation walk();
+        Animation lay();
         void setCurrentAnimation(Animation animation);
         Animation getCurrentAnimation();
         void display(sf::RenderWindow &window);
