@@ -5,3 +5,5 @@ mainp
 *.hpp.gch
 API/dialogue/node_modules
 API/flask/config.py
+API/flask/.env
+API/flas/config.pyc
