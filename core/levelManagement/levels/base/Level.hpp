@@ -12,7 +12,8 @@ class Level{
 
     public: struct EnemyInfo {
         std::string typeName;
-        int count;
+        float xPosition;
+        float yPosition;
     };
 
     private:

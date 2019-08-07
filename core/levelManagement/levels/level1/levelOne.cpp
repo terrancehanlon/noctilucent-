@@ -30,10 +30,21 @@ void LevelOne::setSprites(){
 
 LevelOne::LevelOne(){
     std::vector<Level::EnemyInfo> enemyTypes;
-    EnemyInfo hoodedOccult;
-    hoodedOccult.count = 1;
+    EnemyInfo hoodedOccult, hoodedOccult2, hoodedOccult3;
+    hoodedOccult.xPosition = 50;
+    hoodedOccult.yPosition = 50;
     hoodedOccult.typeName = "hooded-occult";
+    
+    hoodedOccult2.xPosition = 50;
+    hoodedOccult2.yPosition = 50;
+    hoodedOccult2.typeName = "hooded-occult";
+
+    hoodedOccult3.xPosition = 50;
+    hoodedOccult3.yPosition = 50;
+    hoodedOccult3.typeName = "hooded-occult";
     enemyTypes.push_back(hoodedOccult);
+    enemyTypes.push_back(hoodedOccult2);
+    enemyTypes.push_back(hoodedOccult3);     
     Level("level one", enemyTypes);
     this->setLevelTitle("level one");
     this->setEnemyTypes(enemyTypes);

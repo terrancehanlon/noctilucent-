@@ -31,7 +31,7 @@ LevelTwo::LevelTwo(sf::Texture texture, sf::Texture background, TextureManager t
     std::vector<Level::EnemyInfo> enemyTypes;
     EnemyInfo enemyInfo;
     enemyInfo.typeName = "dummy";
-    enemyInfo.count = 1;
+    enemyInfo.xPosition = 10;
     enemyTypes.push_back(enemyInfo);
     this->tm = tm;  
     Level("level two", enemyTypes);

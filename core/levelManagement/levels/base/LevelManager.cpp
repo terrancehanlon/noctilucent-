@@ -37,15 +37,15 @@ void LevelManager::drawLevel(Level level, sf::RenderWindow &window){
     if(level.getEnemyTypeCount() > 0){
         for(int i = 0; i < level.getEnemyTypes().size(); i++){
             if(level.getEnemyTypes().at(i).typeName.compare("dummy") == 0){
-                for(int j = 0; j < level.getEnemyTypes().at(i).count; j++){
-                    Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 250, 150, this->tm);
-                    dummy.ani.play(dummy.walk());
-                    window.draw(dummy.ani);
-                }
+                // for(int j = 0; j < level.getEnemyTypes().at(i).count; j++){
+                //     Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 250, 150, this->tm);
+                //     dummy.ani.play(dummy.walk());
+                //     window.draw(dummy.ani);
+                // }
             }
             else if(level.getEnemyTypes().at(i).typeName.compare("hooded-occult") == 0){
-                std::cout << "Drawing hooded occult " << std::endl;
-                HoodedOccult hoodedOccult(50, 50, tm);
+                HoodedOccult hoodedOccult(level.getEnemyTypes().at(i).xPosition,
+                 level.getEnemyTypes().at(i).yPosition, tm);
                 hoodedOccult.ani.play(hoodedOccult.idle());
                 window.draw(hoodedOccult.ani);
             }
