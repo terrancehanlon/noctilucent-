@@ -45,7 +45,7 @@ void LevelManager::drawLevel(Level level, sf::RenderWindow &window){
             }
             else if(level.getEnemyTypes().at(i).typeName.compare("hooded-occult") == 0){
                 HoodedOccult hoodedOccult(level.getEnemyTypes().at(i).xPosition,
-                 level.getEnemyTypes().at(i).yPosition, tm);
+                level.getEnemyTypes().at(i).yPosition, tm);
                 hoodedOccult.ani.play(hoodedOccult.idle());
                 window.draw(hoodedOccult.ani);
             }

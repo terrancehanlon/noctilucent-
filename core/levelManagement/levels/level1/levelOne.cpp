@@ -32,14 +32,14 @@ LevelOne::LevelOne(){
     std::vector<Level::EnemyInfo> enemyTypes;
     EnemyInfo hoodedOccult, hoodedOccult2, hoodedOccult3;
     hoodedOccult.xPosition = 50;
-    hoodedOccult.yPosition = 50;
+    hoodedOccult.yPosition = sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 2.8 );
     hoodedOccult.typeName = "hooded-occult";
     
-    hoodedOccult2.xPosition = 50;
+    hoodedOccult2.xPosition = 70;
     hoodedOccult2.yPosition = 50;
     hoodedOccult2.typeName = "hooded-occult";
 
-    hoodedOccult3.xPosition = 50;
+    hoodedOccult3.xPosition = 90;
     hoodedOccult3.yPosition = 50;
     hoodedOccult3.typeName = "hooded-occult";
     enemyTypes.push_back(hoodedOccult);

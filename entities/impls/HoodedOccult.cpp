@@ -6,6 +6,7 @@ HoodedOccult::HoodedOccult(float startX, float startY, TextureManager tm){
     this->tm = tm;
     this->ani = AnimatedSprite(sf::seconds(0.9), true, false);
     this->ani.setPosition(sf::Vector2f(startX, startY));
+    this->ani.setScale(sf::Vector2f(3.0f, 3.0f));
     this->setUpIdle();
 }
 
