@@ -6,6 +6,7 @@
 #include "/home/terrance/Desktop/games2/noctilucent-/lib/AnimatedSprite.hpp"
 #include <vector>
 #include "../../../../entities/headers/Dummy.hpp"
+#include "../../../../entities/headers/HoodedOccult.hpp"
 
 class Level{
 

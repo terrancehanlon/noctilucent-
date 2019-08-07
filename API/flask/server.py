@@ -28,7 +28,6 @@ def hello():
 def add():
 	if request.method == 'POST':
 		print(type(os.getenv('host')))
-		# print(request.get_json()['accName'])
 		db = mysql.connect()
 		cur = db.cursor()
 		print(request.get_json())
@@ -38,7 +37,13 @@ def add():
 		cur.close()
 		return "done"
 
+@app.route("/login", methods=['POST'])
+def login():
+	print("HELLO")
+	print(request.get_json())
+	return "idk"
 
+@app.route 	
 
 if __name__ == "__main__":
 	app.run()

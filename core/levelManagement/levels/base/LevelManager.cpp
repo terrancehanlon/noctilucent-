@@ -3,6 +3,7 @@
 
 #include <stack>
 #include <iostream>
+// #include "../../../entities/headers/HoodedOccult.hpp"
 
 LevelManager::LevelManager(TextureManager tm){
     this->tm = tm;
@@ -20,7 +21,7 @@ void LevelManager::setLevelStack(std::stack<Level> levelStack){
 
 
 void LevelManager::drawLevel(Level level, sf::RenderWindow &window){
-    std::cout << level.getLevelTitle() << std::endl;
+    // std::cout << level.getLevelTitle() << std::endl;
     for(int i = 0; i < level.getImages().size(); i++){
         // sf::Sprite sprite = level.getImages().at(i);
         window.draw(level.getImages().at(i));
@@ -34,7 +35,6 @@ void LevelManager::drawLevel(Level level, sf::RenderWindow &window){
     // }
     // std::cout << "ENEMY TYPE COUNT: " + std::to_string(level.getEnemyTypeCount()) << std::endl;
     if(level.getEnemyTypeCount() > 0){
-        
         for(int i = 0; i < level.getEnemyTypes().size(); i++){
             if(level.getEnemyTypes().at(i).typeName.compare("dummy") == 0){
                 for(int j = 0; j < level.getEnemyTypes().at(i).count; j++){
@@ -42,6 +42,12 @@ void LevelManager::drawLevel(Level level, sf::RenderWindow &window){
                     dummy.ani.play(dummy.walk());
                     window.draw(dummy.ani);
                 }
+            }
+            else if(level.getEnemyTypes().at(i).typeName.compare("hooded-occult") == 0){
+                std::cout << "Drawing hooded occult " << std::endl;
+                HoodedOccult hoodedOccult(50, 50, tm);
+                hoodedOccult.ani.play(hoodedOccult.idle());
+                window.draw(hoodedOccult.ani);
             }
         }
     }

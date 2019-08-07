@@ -30,14 +30,21 @@ enum GameState{
     End
 };
 
+    sf::Sprite sprite22;
+    sf::Texture text22;
+
+    text22.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/hooded-sprite-side.png");
+    sprite22.setTexture(text22);
+            sprite22.scale(3.3f, 3.3f);
     TextureManager tm;
 
     tm.loadTexture("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png");
+    tm.loadTexture("hooded-occult", "/home/terrance/Desktop/games2/noctilucent-/assets/hooded-occult.png");
 
-    sf::Vector2i screenDimensions(800,600);
+    sf::Vector2i screenDimensions(2000,2000);
     
     sf::RenderWindow *win;
-    sf::RenderWindow window(sf::VideoMode(screenDimensions.x, screenDimensions.y), "Animations!");
+    sf::RenderWindow window(sf::VideoMode(screenDimensions.x, screenDimensions.y), "Animations!", sf::Style::Fullscreen);
     window.setFramerateLimit(60);
 
     std::vector<sf::Texture> textures;
@@ -80,16 +87,17 @@ enum GameState{
     bool init = true;
 
     std::vector<Player> players;
-    Player pl("name", "/home/terrance/Desktop/games2/noctilucent-/assets/nockt.png");
+    Player pl("name", "/home/terrance/Desktop/games2/noctilucent-/assets/pixel.png");
+    float originalY = pl.ani.getPosition().y;
     // Dummy dm("name", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 100, 100, tm);
     // players.push_back(pl);
     // players.at(0).se
     // Player pl2("name2", "dragonBig.png");
     //Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 150, 150);
-    pl.setPosition(5, screenDimensions.y - 150);
+    pl.setPosition(0, sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 2.8 ));
     // pl2.ani.setColor(sf::Color::Red);
     // window.draw(sprite);
-    currentAnimation = pl.idle();
+    currentAnimation = pl.walk();
     
     
     // sf::Sprite sp = levelone.getImages().at(0);
@@ -120,7 +128,7 @@ enum GameState{
     curl_easy_cleanup(curl);
   }
 
-    bool steady = true;
+    bool shiftingUp = true;
 
     // pl.ani.play(pl.lay());
     while (window.isOpen())
@@ -150,15 +158,17 @@ enum GameState{
         {
             // currentAnimation = &swinging;
             currentAnimation = pl.swing();
+            if(shiftingUp){
+                std::cout << "JUMPING" << std::endl;
+                pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y - 10);
+                shiftingUp = false;
+            }
             // movement.y += speed;
             noKeyWasPressed = false;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-            if(!steady){
-                pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y - 50);
-                steady = !steady;
-            }
+ 
             if(flipped) pl.ani.scale(-1, 1);    
             flipped = false;    
             currentAnimation = pl.walk();
@@ -167,10 +177,10 @@ enum GameState{
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            //currentAnimation = &walkingAnimationRight;
-            if(!steady){
-                pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y - 50);
-                steady = !steady;
+            if(!shiftingUp){
+                std::cout << "JUMPING down" << std::endl;
+                pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y + 10);
+                shiftingUp = !shiftingUp;
             }
             if(!flipped) pl.ani.scale(-1, 1); 
             flipped = true;  
@@ -178,19 +188,20 @@ enum GameState{
             movement.x += speed;
             noKeyWasPressed = false;
         }
-        // animatedSprite.play(*currentAnimation);
-        // animatedSprite.move(movement * frameTime.asSeconds());
-
-        // if no key was pressed stop the animation
         if (noKeyWasPressed)
         {
-            pl.ani.stop();
-            if(steady){
-            pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y + 50);
-            steady = !steady;
+            if(shiftingUp == false){
+                pl.setPosition(pl.ani.getPosition().x, originalY);
             }
+            shiftingUp = true;
+            // pl.ani.stop();
+            // shiftingUp = true;
+            // if(shiftingUp){
+            // pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y + 50);
+            // shiftingUp = !shiftingUp;
+            // }
             
-            currentAnimation = pl.lay();
+            currentAnimation = pl.walk();
             // dummyAnimation = dummy.walk();
             
         }
@@ -228,10 +239,11 @@ enum GameState{
 
         
         // window.draw(levelone->getImages().at(0));
-
+       
         pl.display(window);
         // leveltwo.draw(window);
-        window.draw(dm.ani);
+        // window.draw(dm.ani);
+        window.draw(sprite22);
         // leveltwo.draw(window);
         // currentLevel.draw(window, leveltwo.getEnemies());
         // dummy.display(window);

@@ -20,7 +20,7 @@ Level::Level(){
 Level::Level(std::string name, std::vector<Level::EnemyInfo> enemyTypes){
 this->levelTitle = name;
 this->enemieTypes = enemyTypes;
-std::cout << this->levelTitle + " type size in level construct " + std::to_string(enemyTypes.size()) << std::endl;
+// std::cout << this->levelTitle + " type size in level construct " + std::to_string(enemyTypes.size()) << std::endl;
 }
 
 std::vector<Dummy> Level::getEntities(){
