@@ -47,33 +47,12 @@ enum GameState{
     sf::RenderWindow window(sf::VideoMode(screenDimensions.x, screenDimensions.y), "Animations!", sf::Style::Fullscreen);
     window.setFramerateLimit(60);
 
-    std::vector<sf::Texture> textures;
-    std::vector<Dummy> dummies;
-    sf::Texture text;
-    sf::Texture dummyTexture;
-    sf::Texture backGround;
-    backGround.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/sky.png");
-    dummyTexture.loadFromFile("/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png");
-    GameState gameState = GameState::Intro;
+
     Level currentLevel;
     LevelOne levelone;
-    LevelTwo leveltwo(dummyTexture, backGround, tm);
+    // LevelTwo leveltwo(dummyTexture, backGround, tm);
     LevelManager levelManger(tm);
 
-    // textures.push_back(leveltwo.getTexture());
-    // text = leveltwo.getTexture();
-    // setup window
-
-
-    // LevelEngine engine(win);
-
-    // load texture (spritesheet)
-    // sf::Texture texture;
-    // if (!texture.loadFromFile("dragonBig.png"))
-    // {
-    //     std::cout << "Failed to load player spritesheet!" << std::endl;
-    //     return 1;
-    // }
 
 
     Animation currentAnimation;
@@ -85,54 +64,46 @@ enum GameState{
     bool flipped = false;
     
     bool init = true;
+    bool updatingLevel = false;
 
-    std::vector<Player> players;
-    Player pl("name", "/home/terrance/Desktop/games2/noctilucent-/assets/pixel.png");
-    float originalY = pl.ani.getPosition().y;
-    // Dummy dm("name", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 100, 100, tm);
-    // players.push_back(pl);
-    // players.at(0).se
-    // Player pl2("name2", "dragonBig.png");
-    //Dummy dummy("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 150, 150);
-    pl.setPosition(0, sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 2.8 ));
-    // pl2.ani.setColor(sf::Color::Red);
-    // window.draw(sprite);
-    currentAnimation = pl.walk();
+
+
+
     
-    
-    // sf::Sprite sp = levelone.getImages().at(0);
     currentLevel = levelone;
-    Dummy dm("name", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 10, 10, tm);
-    dummyAnimation = dm.walk();
-    dm.ani.play(dummyAnimation);
-
-  CURL *curl;
-  CURLcode res;
+//   CURL *curl;
+//   CURLcode res;
  
-  curl = curl_easy_init();
-  if(curl) {
-    curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:4567/frank-says");
-    /* example.com is redirected, so we tell libcurl to follow redirection */ 
-    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+//   curl = curl_easy_init();
+//   if(curl) {
+//     curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:4567/frank-says");
+//     /* example.com is redirected, so we tell libcurl to follow redirection */ 
+//     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
  
-    /* Perform the request, res will get the return code */ 
-    res = curl_easy_perform(curl);
-    // std::cout << "hererere" << std::endl;
-    std::cout <<res << std::endl;
-    /* Check for errors */ 
-    if(res != CURLE_OK)
-      fprintf(stderr, "curl_easy_perform() failed: %s\n",
-              curl_easy_strerror(res));
+//     /* Perform the request, res will get the return code */ 
+//     res = curl_easy_perform(curl);
+//     // std::cout << "hererere" << std::endl;
+//     std::cout <<res << std::endl;
+//     /* Check for errors */ 
+//     if(res != CURLE_OK)
+//       fprintf(stderr, "curl_easy_perform() failed: %s\n",
+//               curl_easy_strerror(res));
  
-    /* always cleanup */ 
-    curl_easy_cleanup(curl);
-  }
+//     /* always cleanup */ 
+//     curl_easy_cleanup(curl);
+//   }
 
     bool shiftingUp = true;
 
+    HoodedOccult hoodie(10.0f, 50.0f, tm);
+
     // pl.ani.play(pl.lay());
+        Player pl("name", "/home/terrance/Desktop/games2/noctilucent-/assets/pixel.png");
+        pl.setPosition(sf::VideoMode::getDesktopMode().width /4, sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 2.8 ));
     while (window.isOpen())
     {
+        currentAnimation = pl.walk(); 
+        sf::Time frameTime = frameClock.restart();
         // dummy.display(window);
         sf::Event event;
         while (window.pollEvent(event))
@@ -143,7 +114,7 @@ enum GameState{
                 window.close();
         }
 
-        sf::Time frameTime = frameClock.restart();
+        
 
         // if a key was pressed set the correct animation and move correctly
         sf::Vector2f movement(0.f, 0.f);
@@ -169,86 +140,54 @@ enum GameState{
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
  
-            if(flipped) pl.ani.scale(-1, 1);    
-            flipped = false;    
+            if(!flipped) pl.ani.scale(-1, 1);    
+            flipped = true;    
             currentAnimation = pl.walk();
             movement.x -= speed;
             noKeyWasPressed = false;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            if(!shiftingUp){
-                std::cout << "JUMPING down" << std::endl;
-                pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y + 10);
-                shiftingUp = !shiftingUp;
-            }
-            if(!flipped) pl.ani.scale(-1, 1); 
-            flipped = true;  
+            if(flipped) pl.ani.scale(-1, 1); 
+            flipped = false;  
             currentAnimation = pl.walk();
             movement.x += speed;
             noKeyWasPressed = false;
         }
         if (noKeyWasPressed)
         {
-            if(shiftingUp == false){
-                pl.setPosition(pl.ani.getPosition().x, originalY);
-            }
-            shiftingUp = true;
-            // pl.ani.stop();
-            // shiftingUp = true;
-            // if(shiftingUp){
-            // pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y + 50);
-            // shiftingUp = !shiftingUp;
-            // }
             
             currentAnimation = pl.walk();
-            // dummyAnimation = dummy.walk();
             
         }
         noKeyWasPressed = true;
 
+        // std::cout << std::to_string(frameTime.asMilliseconds()) << std::endl;
+    window.clear();
         pl.ani.play(currentAnimation);
-        pl.ani.update(frameTime);
+        // pl.ani.update(frameTime);
         pl.ani.move(movement * frameTime.asSeconds());
-        levelone.moveSky(movement * frameTime.asSeconds()); 
-        
 
-        if(pl.ani.getPosition().x > screenDimensions.x){
-            // std::cout << "Player off screen" << std::endl;
-            currentLevel = leveltwo;
-            // leveltwo.displayEnemies(window);
-            pl.setPosition(5, screenDimensions.y - 150);
-        }else{
-            // std::cout << "Player on screen" << std::endl;
-        }      
+        hoodie.ani.play(hoodie.idle());
+        hoodie.ani.update(frameTime);
 
-        // if( pl.ani.getGlobalBounds().intersects(pl2.ani.getGlobalBounds()) ){
-        //     // std::cout << "COLLISION" << std::endl;
-        // }
-        // else{
-        //     // std::cout << "NO COLLISION" << std::endl;
-        // }
+        window.draw(hoodie.ani);
+
+        // currentLevel = levelManger.drawLevel(currentLevel, window, frameTime, movement);
 
         
-        // draw
-        window.clear();
-        levelManger.drawLevel(currentLevel, window);
-        // leveltwo.draw(window);
-        // window.draw(sprite);
-        // window.draw(road);
-
-        
+        if(updatingLevel){
+            levelManger.updateLevel(currentLevel, window, frameTime);
+        }
+        if(!updatingLevel){
+             currentLevel = levelManger.drawLevel(currentLevel, window, frameTime, movement);
+            updatingLevel = true;
+        }
         // window.draw(levelone->getImages().at(0));
-       
         pl.display(window);
-        // leveltwo.draw(window);
-        // window.draw(dm.ani);
-        window.draw(sprite22);
-        // leveltwo.draw(window);
-        // currentLevel.draw(window, leveltwo.getEnemies());
-        // dummy.display(window);
-        // window.draw(dummy.ani);
-        // window.draw(pl2.ani);
+        // hoodie.display(window);
+
+
         
         window.display();
     }

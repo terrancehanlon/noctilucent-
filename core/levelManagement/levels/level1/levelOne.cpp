@@ -31,16 +31,16 @@ void LevelOne::setSprites(){
 LevelOne::LevelOne(){
     std::vector<Level::EnemyInfo> enemyTypes;
     EnemyInfo hoodedOccult, hoodedOccult2, hoodedOccult3;
-    hoodedOccult.xPosition = 50;
-    hoodedOccult.yPosition = sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 2.8 );
+    hoodedOccult.xPosition = sf::VideoMode::getDesktopMode().width /4.5 - 15;
+    hoodedOccult.yPosition = sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 2.3 );
     hoodedOccult.typeName = "hooded-occult";
     
-    hoodedOccult2.xPosition = 70;
-    hoodedOccult2.yPosition = 50;
+    hoodedOccult2.xPosition = sf::VideoMode::getDesktopMode().width /4.5 - 15;
+    hoodedOccult2.yPosition =  sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 2.7 );
     hoodedOccult2.typeName = "hooded-occult";
 
-    hoodedOccult3.xPosition = 90;
-    hoodedOccult3.yPosition = 50;
+    hoodedOccult3.xPosition = sf::VideoMode::getDesktopMode().width /4.5 - 15;
+    hoodedOccult3.yPosition =  sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 3.1 );
     hoodedOccult3.typeName = "hooded-occult";
     enemyTypes.push_back(hoodedOccult);
     enemyTypes.push_back(hoodedOccult2);

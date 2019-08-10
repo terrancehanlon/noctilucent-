@@ -22,6 +22,7 @@ class Level{
 
     public:
         std::vector<sf::Sprite> images;
+        std::vector<HoodedOccult *> occ;
         std::vector<Dummy> entities;
         std::string getLevelTitle();
         Level();

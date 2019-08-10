@@ -22,6 +22,7 @@
 ////////////////////////////////////////////////////////////
 
 #include "AnimatedSprite.hpp"
+#include <iostream>
 
 AnimatedSprite::AnimatedSprite(sf::Time frameTime, bool paused, bool looped) :
     m_animation(NULL), m_frameTime(frameTime), m_currentFrame(0), m_isPaused(paused), m_isLooped(looped), m_texture(NULL)
@@ -144,15 +145,20 @@ void AnimatedSprite::setFrame(std::size_t newFrame, bool resetTime)
 
 void AnimatedSprite::update(sf::Time deltaTime)
 {
+    // std::cout << std::to_string(deltaTime.asSeconds()) << std::endl;
     // if not paused and we have a valid animation
     if (!m_isPaused && m_animation)
     {
+        
         // add delta time
         m_currentTime += deltaTime;
+    std::cout << std::to_string(deltaTime.asSeconds()) << std::endl;
 
         // if current time is bigger then the frame time advance one frame
         if (m_currentTime >= m_frameTime)
         {
+            std::cout << "should be updating" << std::endl;
+            // std::cout << "IS not paused" << std::endl;
             // reset time, but keep the remainder
             m_currentTime = sf::microseconds(m_currentTime.asMicroseconds() % m_frameTime.asMicroseconds());
 
