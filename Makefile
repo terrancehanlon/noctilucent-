@@ -9,8 +9,9 @@ all:
 	g++ -std=c++11 -c core/levelManagement/levels/level1/levelOne.cpp -o target/levelOne.o;
 	g++ -std=c++11 -c core/levelManagement/levels/level2/LevelTwo.cpp -o target/levelTwo.o;
 	g++ -std=c++11 -c core/TextureManager.cpp -o target/texuremanager.o;
+	g++ -std=c++11  -c core/UI/ActionBar.cpp -o target/ActionBar.o
 	g++ -std=c++11 -c core/main.cpp -o target/main.o;
-	g++ target/Animation.o target/AnimatedSprite.o target/Player.o target/Dummy.o target/HoodedOccult.o target/main.o target/level.o target/levelManager.o target/levelOne.o target/levelTwo.o target/texuremanager.o -o mainp -lcurl -lsfml-graphics -lsfml-window -lsfml-system;
+	g++ target/Animation.o target/AnimatedSprite.o target/Player.o target/Dummy.o target/HoodedOccult.o target/main.o target/level.o target/levelManager.o target/levelOne.o target/levelTwo.o target/texuremanager.o target/ActionBar.o -o mainp -lcurl -lsfml-graphics -lsfml-window -lsfml-system;
 
 main:
 		g++ -std=c++11 -c core/main.cpp -o target/main.o;

@@ -19,9 +19,9 @@ void HoodedOccult::setUpIdle(){
     this->ani_idle.addFrame(sf::IntRect(73, 1, 14, 31));
     this->ani_idle.addFrame(sf::IntRect(105, 1, 14, 31));
     this->ani_idle.addFrame(sf::IntRect(137, 1, 14, 31));
-    this->ani_idle.addFrame(sf::IntRect(137, 33, 16, 31));
+    // this->ani_idle.addFrame(sf::IntRect(137, 33, 16, 31));
     this->ani_idle.addFrame(sf::IntRect(169, 33, 17, 31));
-    this->ani_idle.addFrame(sf::IntRect(201, 33, 21, 31));
+    // this->ani_idle.addFrame(sf::IntRect(201, 33, 21, 31));
 }
 
 void HoodedOccult::display(sf::RenderWindow &window){

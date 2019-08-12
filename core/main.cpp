@@ -11,6 +11,7 @@
 #include "TextureManager.hpp"
 #include <curl/curl.h>
 #include <string>
+#include "./UI/ActionBar.hpp"
 
 
 static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
@@ -40,6 +41,7 @@ enum GameState{
 
     tm.loadTexture("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png");
     tm.loadTexture("hooded-occult", "/home/terrance/Desktop/games2/noctilucent-/assets/hooded-occult.png");
+    tm.loadTexture("actionbar", "/home/terrance/Desktop/games2/noctilucent-/assets/ab-fb.png");
 
     sf::Vector2i screenDimensions(2000,2000);
     
@@ -55,8 +57,7 @@ enum GameState{
 
 
 
-    Animation currentAnimation;
-    Animation dummyAnimation;
+    
     sf::Clock frameClock;
 
     float speed = 180.f;
@@ -65,6 +66,20 @@ enum GameState{
     
     bool init = true;
     bool updatingLevel = false;
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////      PLAYER ESSENTIALS         /////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    //animations
+    Animation currentAnimation;
+
+    //UI set up
+    ActionBar actionbar(tm);
 
 
 
@@ -165,13 +180,14 @@ enum GameState{
         // std::cout << std::to_string(frameTime.asMilliseconds()) << std::endl;
     window.clear();
         pl.ani.play(currentAnimation);
-        // pl.ani.update(frameTime);
+        pl.ani.update(frameTime);
         pl.ani.move(movement * frameTime.asSeconds());
 
         hoodie.ani.play(hoodie.idle());
         hoodie.ani.update(frameTime);
 
-        window.draw(hoodie.ani);
+        // window.draw(hoodie.ani);
+        
 
         // currentLevel = levelManger.drawLevel(currentLevel, window, frameTime, movement);
 
@@ -185,6 +201,8 @@ enum GameState{
         }
         // window.draw(levelone->getImages().at(0));
         pl.display(window);
+        // actionbar.drawActionBar(window);
+        window.draw(actionbar.actionbar);
         // hoodie.display(window);
 
 

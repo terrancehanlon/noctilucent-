@@ -41,9 +41,14 @@ def add():
 def login():
 	print("HELLO")
 	print(request.get_json())
-	return "idk"
+	name = request.get_json()['name']
+	db = mysql.connect()
+	cur = db.cursor()
+	val = cur.execute("SELECT * FROM user WHERE name = %s", name)
+	db.commit()
+	cur.close()
+	return val
 
-@app.route 	
 
 if __name__ == "__main__":
 	app.run()
