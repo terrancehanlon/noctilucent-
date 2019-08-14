@@ -2,6 +2,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "../../core/Abilities/Ability.hpp"
 Player::Player(std::string name, std::string path){
 
     this->name = name;
@@ -133,4 +134,8 @@ Animation Player::swing(){
     // this->ani.play(this->ani_swing);
     return this->ani_swing;
 
+}
+
+int Player::fire(Ability ability){
+    ability.cordX += ability.speed; 
 }

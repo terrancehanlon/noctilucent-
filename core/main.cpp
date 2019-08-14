@@ -14,6 +14,7 @@
 #include "./UI/ActionBar.hpp"
 // #include "load.cpp"
 #include "./Abilities/Range/FireBlast.hpp"
+#include <stack>
 
 
 static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
@@ -119,6 +120,8 @@ enum GameState{
 
     bool shiftingUp = true;
     bool ability = false;
+    bool abilityMove = true;
+    std::stack<int> abilityStack;
 
     HoodedOccult hoodie(10.0f, 50.0f, tm);
     
@@ -182,13 +185,16 @@ enum GameState{
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)){
             ability = true;
-            noKeyWasPressed = false;
+            noKeyWasPressed = false;    
         }
         if (noKeyWasPressed)
         {
             
             currentAnimation = pl.walk();
+            if(abilityMove){
             ability = false;
+
+            }
             
         }
         noKeyWasPressed = true;
@@ -216,8 +222,19 @@ enum GameState{
             updatingLevel = true;
         }
         if(ability){
-            FireBlast fireBlast(window);
-            // fireBlast.draw(window);
+            if(abilityMove){
+                // int x = pl.ani.getPosition().x;
+                abilityStack.push(pl.ani.getPosition().x);
+                abilityMove = false;
+            }
+            int newX = abilityStack.top();
+            abilityStack.pop();
+            FireBlast fireBlast((newX + 1), pl.ani.getPosition().y);
+            // pl.fire(fireBlast)
+            fireBlast.draw(window);
+            newX = newX + 1;
+            abilityStack.push(newX);
+            // std::cout << "ability : " + std::to_string(abilityStack.top)_
         }
         // window.draw(levelone->getImages().at(0));
         pl.display(window);

@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "../../lib/AnimatedSprite.hpp"
 #include <vector>
+#include "../../core/Abilities/Ability.hpp"
 
 // struct animation_object {
 //     std::string name;
@@ -52,6 +53,8 @@ class Player
         void setCurrentAnimation(Animation animation);
         Animation getCurrentAnimation();
         void display(sf::RenderWindow &window);
+        void update(sf::RenderWindow &window);
+        int fire(Ability ability);
 };
 
 

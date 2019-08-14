@@ -4,6 +4,7 @@
  
 #include "TextureManager.hpp"
  
+ 
 void TextureManager::loadTexture(const std::string& name, const std::string& filename)
 {
     /* Load the texture */

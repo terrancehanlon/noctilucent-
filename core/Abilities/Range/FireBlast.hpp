@@ -7,7 +7,7 @@
 class FireBlast : public Ability {
 
     public:
-        FireBlast(sf::RenderWindow &window);
+        FireBlast(int x, int y);
         sf::Texture texture;
     
 

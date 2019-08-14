@@ -13,8 +13,11 @@ class Ability {
         int damage;
         std::string name;
         
-
     public:
+        int speed;
+        bool on;
+        int cordX;
+        int cordY;
         Animation animation;
         AnimatedSprite animatedSprite;
         Ability(int cost, int damage, std::string name);
