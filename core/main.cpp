@@ -12,6 +12,9 @@
 #include <curl/curl.h>
 #include <string>
 #include "./UI/ActionBar.hpp"
+#include "./Namespaces/ImageManager.cpp"
+#include "./Namespaces/TextureManager.cpp"
+#include "./Abilities/Range/FireBlast.hpp"
 
 
 static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
@@ -20,8 +23,17 @@ static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *use
     return size * nmemb;
 }
 
+void init(){
+    // textm::TextM.
+    // textm::TextM:    
+    textm::TextM::setFile(imageHandler::fireblast);
+    // textm::TextM::fbText = textm.TextM::fbText.loadFromFile(imageHandler::fireblast);
+}
+
 int main()
 {
+
+init();
 
 enum GameState{
     Intro,
@@ -109,11 +121,13 @@ enum GameState{
 //   }
 
     bool shiftingUp = true;
+    bool ability = false;
 
     HoodedOccult hoodie(10.0f, 50.0f, tm);
+    
 
     // pl.ani.play(pl.lay());
-        Player pl("name", "/home/terrance/Desktop/games2/noctilucent-/assets/pixel.png");
+        Player pl("name", imageHandler::main);
         pl.setPosition(sf::VideoMode::getDesktopMode().width /4, sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 2.8 ));
     while (window.isOpen())
     {
@@ -169,10 +183,14 @@ enum GameState{
             movement.x += speed;
             noKeyWasPressed = false;
         }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)){
+            ability = true;
+        }
         if (noKeyWasPressed)
         {
             
             currentAnimation = pl.walk();
+            ability = false;
             
         }
         noKeyWasPressed = true;
@@ -198,6 +216,9 @@ enum GameState{
         if(!updatingLevel){
              currentLevel = levelManger.drawLevel(currentLevel, window, frameTime, movement);
             updatingLevel = true;
+        }
+        if(ability){
+            FireBlast fireBlast(window);
         }
         // window.draw(levelone->getImages().at(0));
         pl.display(window);
