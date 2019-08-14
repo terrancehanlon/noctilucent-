@@ -1,7 +1,12 @@
+#ifndef IMAGEHANDLER_INCLUDE
+#define IMAGEHANDLER_INCLUDE
+
 #include <string>
 
 namespace imageHandler {
-    const std::string main;
-    const std::string fireblast;
+    extern std::string main;
+    extern std::string fireblast;
 
 };
+
+#endif

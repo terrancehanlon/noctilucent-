@@ -12,8 +12,7 @@
 #include <curl/curl.h>
 #include <string>
 #include "./UI/ActionBar.hpp"
-#include "./Namespaces/ImageManager.cpp"
-#include "./Namespaces/TextureManager.cpp"
+// #include "load.cpp"
 #include "./Abilities/Range/FireBlast.hpp"
 
 
@@ -26,14 +25,12 @@ static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *use
 void init(){
     // textm::TextM.
     // textm::TextM:    
-    textm::TextM::setFile(imageHandler::fireblast);
+    // textm::TextM::setFile();xx`x`
     // textm::TextM::fbText = textm.TextM::fbText.loadFromFile(imageHandler::fireblast);
 }
 
 int main()
 {
-
-init();
 
 enum GameState{
     Intro,
@@ -127,7 +124,7 @@ enum GameState{
     
 
     // pl.ani.play(pl.lay());
-        Player pl("name", imageHandler::main);
+        Player pl("name","/home/terrance/Desktop/games2/noctilucent-/assets/pixel.png");
         pl.setPosition(sf::VideoMode::getDesktopMode().width /4, sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 2.8 ));
     while (window.isOpen())
     {
@@ -185,6 +182,7 @@ enum GameState{
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)){
             ability = true;
+            noKeyWasPressed = false;
         }
         if (noKeyWasPressed)
         {
@@ -219,6 +217,7 @@ enum GameState{
         }
         if(ability){
             FireBlast fireBlast(window);
+            // fireBlast.draw(window);
         }
         // window.draw(levelone->getImages().at(0));
         pl.display(window);
