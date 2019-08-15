@@ -222,18 +222,27 @@ enum GameState{
             updatingLevel = true;
         }
         if(ability){
+            if(abilityStack.size() > 0){
+                if(abilityStack.top() >= sf::VideoMode::getDesktopMode().width){
+                    ability = false;
+                    abilityMove = true; //init of ability to store inital location
+                }
+            }
             if(abilityMove){
                 // int x = pl.ani.getPosition().x;
-                abilityStack.push(pl.ani.getPosition().x);
+                abilityStack.push(pl.ani.getPosition().x + 15.0);
                 abilityMove = false;
             }
+            else{
             int newX = abilityStack.top();
             abilityStack.pop();
             FireBlast fireBlast((newX + 1), pl.ani.getPosition().y);
             // pl.fire(fireBlast)
             fireBlast.draw(window);
-            newX = newX + 1;
+            newX = newX + fireBlast.speed;
             abilityStack.push(newX);
+            }
+
             // std::cout << "ability : " + std::to_string(abilityStack.top)_
         }
         // window.draw(levelone->getImages().at(0));
