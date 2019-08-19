@@ -30,6 +30,10 @@ void init(){
     // textm::TextM::fbText = textm.TextM::fbText.loadFromFile(imageHandler::fireblast);
 }
 
+struct LevelInfo {
+    bool hasEnemies;
+};
+
 int main()
 {
 
@@ -65,6 +69,7 @@ enum GameState{
     // LevelTwo leveltwo(dummyTexture, backGround, tm);
     LevelManager levelManger(tm);
 
+    Dummy dumm("dummy","/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png", 50, 50, tm);
 
 
     
@@ -74,7 +79,7 @@ enum GameState{
     bool noKeyWasPressed = true;
     bool flipped = false;
     
-    bool init = true;
+    bool drawinit = true;
     bool updatingLevel = false;
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -122,13 +127,20 @@ enum GameState{
     bool ability = false;
     bool abilityMove = true;
     std::stack<int> abilityStack;
+    std::stack<HoodedOccult> enemyStack;
+    dumm.ani.play(dumm.walk());
+    bool init = false;
 
     HoodedOccult hoodie(10.0f, 50.0f, tm);
-    
+    LevelInfo info{false};
+
+    Animation hoodieAn = hoodie.idle();
+
+    hoodie.ani.play(hoodie.idle());
 
     // pl.ani.play(pl.lay());
         Player pl("name","/home/terrance/Desktop/games2/noctilucent-/assets/pixel.png");
-        pl.setPosition(sf::VideoMode::getDesktopMode().width /4, sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 2.8 ));
+        pl.setPosition(sf::VideoMode::getDesktopMode().width /2.6, sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 2.7 ));
     while (window.isOpen())
     {
         currentAnimation = pl.walk(); 
@@ -148,23 +160,36 @@ enum GameState{
         // if a key was pressed set the correct animation and move correctly
         sf::Vector2f movement(0.f, 0.f);
         sf::Vector2f movement2(0.f, 0.f);
+        //  std::cout << std::to_string(sf::VideoMode::getDesktopMode().width /2.6) << std::endl;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
             currentAnimation = pl.walk();
-            // movement.y -= speed;
+            if(currentLevel.checkIfConstraint(pl.ani.getPosition().x, pl.ani.getPosition().y)){
+                movement.y -= speed;
+                noKeyWasPressed = true;
+            }
+            else{
             noKeyWasPressed = false;
+            }
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
             // currentAnimation = &swinging;
-            currentAnimation = pl.swing();
-            if(shiftingUp){
-                std::cout << "JUMPING" << std::endl;
-                pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y - 10);
-                shiftingUp = false;
+            currentAnimation = pl.walk();
+            // if(shiftingUp){
+            //     std::cout << "JUMPING" << std::endl;
+            //     pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y - 10);
+            //     shiftingUp = false;
+            // }
+            if(currentLevel.checkIfConstraint(pl.ani.getPosition().x, pl.ani.getPosition().y)){
+                movement.y += speed;
+                noKeyWasPressed = true;
             }
-            // movement.y += speed;
-            noKeyWasPressed = false;
+            else{
+                movement.y += speed;
+                noKeyWasPressed = false;
+            }
+    
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
@@ -191,6 +216,8 @@ enum GameState{
         {
             
             currentAnimation = pl.walk();
+            // hoodie.ani.play(hoodie.idle());
+            hoodieAn = hoodie.idle();
             if(abilityMove){
             ability = false;
 
@@ -198,24 +225,25 @@ enum GameState{
             
         }
         noKeyWasPressed = true;
+    
+    //if currentLevel.advanceLevel() == true
 
-        // std::cout << std::to_string(frameTime.asMilliseconds()) << std::endl;
+    
     window.clear();
         pl.ani.play(currentAnimation);
+        hoodie.ani.play(hoodieAn);
         pl.ani.update(frameTime);
         pl.ani.move(movement * frameTime.asSeconds());
-
-        hoodie.ani.play(hoodie.idle());
-        hoodie.ani.update(frameTime);
-
-        // window.draw(hoodie.ani);
-        
-
-        // currentLevel = levelManger.drawLevel(currentLevel, window, frameTime, movement);
-
         
         if(updatingLevel){
-            levelManger.updateLevel(currentLevel, window, frameTime);
+            if(drawinit){
+                levelManger.updateLevel(currentLevel, window, frameTime, hoodieAn);
+            }
+            else{
+                levelManger.updateLevel(currentLevel, window, frameTime, hoodieAn);
+                drawinit = true;
+            }
+            
         }
         if(!updatingLevel){
              currentLevel = levelManger.drawLevel(currentLevel, window, frameTime, movement);
@@ -249,7 +277,8 @@ enum GameState{
         pl.display(window);
         // actionbar.drawActionBar(window);
         window.draw(actionbar.actionbar);
-        // hoodie.display(window);
+        window.draw(dumm.ani);
+        hoodie.display(window);
 
 
         

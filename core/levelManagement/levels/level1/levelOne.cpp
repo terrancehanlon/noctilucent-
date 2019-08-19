@@ -30,7 +30,7 @@ void LevelOne::setSprites(){
 
 LevelOne::LevelOne(){
     std::vector<Level::EnemyInfo> enemyTypes;
-    EnemyInfo hoodedOccult, hoodedOccult2, hoodedOccult3;
+    EnemyInfo hoodedOccult, hoodedOccult2, hoodedOccult3, player;
     hoodedOccult.xPosition = sf::VideoMode::getDesktopMode().width /4.5 - 15;
     hoodedOccult.yPosition = sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 2.3 );
     hoodedOccult.typeName = "hooded-occult";
@@ -42,6 +42,11 @@ LevelOne::LevelOne(){
     hoodedOccult3.xPosition = sf::VideoMode::getDesktopMode().width /4.5 - 15;
     hoodedOccult3.yPosition =  sf::VideoMode::getDesktopMode().height - (sf::VideoMode::getDesktopMode().height / 3.1 );
     hoodedOccult3.typeName = "hooded-occult";
+
+    player.xPosition = 70;
+    player.yPosition = 70;
+    player.typeName = "player";
+    enemyTypes.push_back(player);
     enemyTypes.push_back(hoodedOccult);
     enemyTypes.push_back(hoodedOccult2);
     enemyTypes.push_back(hoodedOccult3);     
@@ -53,6 +58,15 @@ LevelOne::LevelOne(){
     // sf::Sprite road;
     this->setTextures();
     this->setSprites();
+
+    LevelConstraints constraint1;
+    constraint1.xRangeStart = sf::VideoMode::getDesktopMode().width / 3;
+    constraint1.xRangeDone = sf::VideoMode::getDesktopMode().width / 2;
+    constraint1.yRangeStart = sf::VideoMode::getDesktopMode().width / 2;
+    constraint1.yRangeDone = sf::VideoMode::getDesktopMode().width / 3;
+    
+    this->insertConstraint(constraint1);
+
 }   
 
 void LevelOne::moveSky( sf::Vector2f movement){

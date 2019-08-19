@@ -152,12 +152,13 @@ void AnimatedSprite::update(sf::Time deltaTime)
         
         // add delta time
         m_currentTime += deltaTime;
-    std::cout << std::to_string(deltaTime.asSeconds()) << std::endl;
+    // std::cout << std::to_string(deltaTime.asSeconds()) << std::endl;
 
         // if current time is bigger then the frame time advance one frame
+
         if (m_currentTime >= m_frameTime)
         {
-            std::cout << "should be updating" << std::endl;
+            // std::cout << "should be updating" << std::endl;
             // std::cout << "IS not paused" << std::endl;
             // reset time, but keep the remainder
             m_currentTime = sf::microseconds(m_currentTime.asMicroseconds() % m_frameTime.asMicroseconds());
@@ -165,6 +166,15 @@ void AnimatedSprite::update(sf::Time deltaTime)
             // get next Frame index
             if (m_currentFrame + 1 < m_animation->getSize())
                 m_currentFrame++;
+            else if(m_currentFrame == m_animation->getSize()){
+                m_currentFrame = 0;
+
+                if (!m_isLooped)
+                {
+                    m_isPaused = true;
+                }
+
+            }
             else
             {
                 // animation has ended
@@ -176,9 +186,9 @@ void AnimatedSprite::update(sf::Time deltaTime)
                 }
 
             }
-
+            // m_currentFrame = 0;
             // set the current frame, not reseting the time
-            setFrame(m_currentFrame, false);
+            setFrame(m_currentFrame, true);
         }
     }
 }

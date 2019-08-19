@@ -4,6 +4,7 @@
 #include <stack> 
 #include "./Level.hpp"
 
+
 class LevelManager {
     private:
         std::stack<Level> levelStack;
@@ -16,7 +17,7 @@ class LevelManager {
         std::stack<Level> getLevelStack();
         void setLevelStack(std::stack<Level> levelStack);
         Level drawLevel(Level level, sf::RenderWindow &window, sf::Time frameTime, sf::Vector2f);
-        void updateLevel(Level level, sf::RenderWindow &window, sf::Time frameTime);
+        void updateLevel(Level level, sf::RenderWindow &window, sf::Time frameTime, Animation animation);
         
 };
 

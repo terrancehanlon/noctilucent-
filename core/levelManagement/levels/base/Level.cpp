@@ -1,6 +1,8 @@
 #include "Level.hpp"
 #include <vector>
 #include <iostream>
+#include <iomanip>
+
 
 
 
@@ -64,3 +66,32 @@ void Level::setLevelTitle(std::string levelTitle){
 void Level::setEnemyTypes(std::vector<EnemyInfo> info){
     this->enemieTypes = info;
 }
+
+//984.615385
+
+bool Level::checkIfConstraint(float x, float y){
+    for(int i = 0; i < this->constraints.size(); i++){
+        std::cout << "CHECKING: " + std::to_string(x) << std::endl;
+        //kinda ugly to check this way?
+        if(x >= this->constraints.at(i).xRangeStart){
+            if(x <= this->constraints.at(i).xRangeDone){
+                return true;
+            }
+        }
+        // if(
+        //     x >= this->constraints.at(i).xRangeStart && 
+        //     x <= this->constraints.at(i).xRangeDone  && 
+        //     y >= this->constraints.at(i).yRangeStart &&
+        //     y <= this->constraints.at(i).yRangeDone){
+        //         std::cout << "CONSTRAINT =======" << std::endl;
+        //         return true;
+        // }
+    }
+
+    return false;
+}
+
+void Level::insertConstraint(LevelConstraints constraint){
+    this->constraints.push_back(constraint);
+}
+

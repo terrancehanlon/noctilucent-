@@ -11,3 +11,7 @@ Player contains animation and animated sprite. The animated sprite plays the ani
 Ani_Sprite player;
 Animation theAnimation;
 player.play(animation)
+
+
+problem with sprite blinking at end of animation:
+    pass animation object in as a variable 
