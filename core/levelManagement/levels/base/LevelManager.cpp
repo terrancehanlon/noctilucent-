@@ -67,15 +67,16 @@ frameCounter += frameSpeed * frameClock.restart().asSeconds();
     return level;
 }
 //losing reference because im storing in vector which copies the object
-void LevelManager::updateLevel(Level level, sf::RenderWindow &window, sf::Time frameTime, Animation animation){
+void LevelManager::updateLevel(Level level, sf::RenderWindow &window, sf::Time frameTime, AnimationHandler am){
         bool hasEnemies = false;
         for(int i = 0; i < level.getImages().size(); i++){
         window.draw(level.getImages().at(i));
     }
 
+    
     for(int i = 0; i < level.occ.size(); i++){
         // std::cout << "level occ" << std::endl;
-        level.occ.at(i)->ani.play(animation);
+        level.occ.at(i)->ani.play(am.getAnimation("hoodie"));
         level.occ.at(i)->ani.update(frameTime);
         window.draw(level.occ.at(i)->ani);   
     }

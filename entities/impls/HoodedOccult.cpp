@@ -30,4 +30,27 @@ void HoodedOccult::display(sf::RenderWindow &window){
 
 Animation HoodedOccult::idle(){
     return this->ani_idle;
+};  
+ 
+ Animation HoodedOccult::static_walk(TextureManager tm){
+    Animation static_idle;
+    static_idle.setSpriteSheet(tm.getRef("hooded-occult"));
+    static_idle.addFrame(sf::IntRect(9, 1, 14, 31));
+    static_idle.addFrame(sf::IntRect(41, 1, 14, 31));
+    static_idle.addFrame(sf::IntRect(73, 1, 14, 31));
+    static_idle.addFrame(sf::IntRect(105, 1, 14, 31));
+    static_idle.addFrame(sf::IntRect(137, 1, 14, 31));
+    static_idle.addFrame(sf::IntRect(137, 33, 16, 31));
+    static_idle.addFrame(sf::IntRect(169, 33, 17, 31));
+    static_idle.addFrame(sf::IntRect(201, 33, 21, 31));
+    // this->ani_idle.addFrame(sf::IntRect(9, 1, 14, 31));
+    // this->ani_idle.addFrame(sf::IntRect(41, 1, 14, 31));
+    // this->ani_idle.addFrame(sf::IntRect(73, 1, 14, 31));
+    // this->ani_idle.addFrame(sf::IntRect(105, 1, 14, 31));
+    // this->ani_idle.addFrame(sf::IntRect(137, 1, 14, 31));
+    // this->ani_idle.addFrame(sf::IntRect(137, 33, 16, 31));
+    // this->ani_idle.addFrame(sf::IntRect(169, 33, 17, 31));
+    // this->ani_idle.addFrame(sf::IntRect(201, 33, 21, 31));
+
+    return static_idle;
 }

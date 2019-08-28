@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from flaskext.mysql import MySQL
 from flask import g
+import json
 # from flask.config import Config
 import config
 import os
@@ -39,15 +40,24 @@ def add():
 
 @app.route("/login", methods=['POST'])
 def login():
-	print("HELLO")
-	print(request.get_json())
+	# print("HELLO")
+	# print(request.get_json())
 	name = request.get_json()['name']
+	print request.get_json()['name']
+	# print request.get_json()['name']
+	# response = jsonify()
 	db = mysql.connect()
 	cur = db.cursor()
 	val = cur.execute("SELECT * FROM user WHERE name = %s", name)
 	db.commit()
 	cur.close()
-	return val
+	#tuple of tuples
+	# print cur.fetchall()[0][0]
+	responseTuple = cur.fetchall()
+	return formatResponse(str(responseTuple[0][0]), str(responseTuple[0][1]), str(responseTuple[0][2]))
+
+def formatResponse(name, wepid, idR):
+	return '{} {} {}'.format(name, wepid, idR)
 
 
 if __name__ == "__main__":

@@ -4,6 +4,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "/home/terrance/Desktop/games2/noctilucent-/lib/AnimatedSprite.hpp"
+#include "/home/terrance/Desktop/games2/noctilucent-/lib/Animation.hpp"
 #include <vector>
 #include "../../../../entities/headers/Dummy.hpp"
 #include "../../../../entities/headers/HoodedOccult.hpp"

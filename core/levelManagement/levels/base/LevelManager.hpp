@@ -3,6 +3,7 @@
 
 #include <stack> 
 #include "./Level.hpp"
+#include "../../../Namespaces/AnimationHandler.hpp"
 
 
 class LevelManager {
@@ -17,7 +18,7 @@ class LevelManager {
         std::stack<Level> getLevelStack();
         void setLevelStack(std::stack<Level> levelStack);
         Level drawLevel(Level level, sf::RenderWindow &window, sf::Time frameTime, sf::Vector2f);
-        void updateLevel(Level level, sf::RenderWindow &window, sf::Time frameTime, Animation animation);
+        void updateLevel(Level level, sf::RenderWindow &window, sf::Time frameTime, AnimationHandler animation);
         
 };
 

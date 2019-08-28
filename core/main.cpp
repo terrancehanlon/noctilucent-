@@ -15,6 +15,7 @@
 // #include "load.cpp"
 #include "./Abilities/Range/FireBlast.hpp"
 #include <stack>
+#include "Namespaces/AnimationHandler.hpp"
 
 
 static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
@@ -52,10 +53,14 @@ enum GameState{
     sprite22.setTexture(text22);
             sprite22.scale(3.3f, 3.3f);
     TextureManager tm;
+    AnimationHandler am;
 
+    am.addAnimation("hoodie", HoodedOccult::static_walk(tm));
     tm.loadTexture("dummy", "/home/terrance/Desktop/games2/noctilucent-/assets/dummy.png");
     tm.loadTexture("hooded-occult", "/home/terrance/Desktop/games2/noctilucent-/assets/hooded-occult.png");
     tm.loadTexture("actionbar", "/home/terrance/Desktop/games2/noctilucent-/assets/ab-fb.png");
+
+
 
     sf::Vector2i screenDimensions(2000,2000);
     
@@ -164,7 +169,7 @@ enum GameState{
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
             currentAnimation = pl.walk();
-            if(currentLevel.checkIfConstraint(pl.ani.getPosition().x, pl.ani.getPosition().y)){
+            if(!currentLevel.checkIfConstraint(pl.ani.getPosition().x, pl.ani.getPosition().y)){
                 movement.y -= speed;
                 noKeyWasPressed = true;
             }
@@ -181,12 +186,12 @@ enum GameState{
             //     pl.setPosition(pl.ani.getPosition().x, pl.ani.getPosition().y - 10);
             //     shiftingUp = false;
             // }
-            if(currentLevel.checkIfConstraint(pl.ani.getPosition().x, pl.ani.getPosition().y)){
+            if(!currentLevel.checkIfConstraint(pl.ani.getPosition().x, pl.ani.getPosition().y)){
                 movement.y += speed;
                 noKeyWasPressed = true;
             }
             else{
-                movement.y += speed;
+                // movement.y += speed;
                 noKeyWasPressed = false;
             }
     
@@ -231,16 +236,17 @@ enum GameState{
     
     window.clear();
         pl.ani.play(currentAnimation);
-        hoodie.ani.play(hoodieAn);
+        // hoodie.ani.play(hoodieAn);
         pl.ani.update(frameTime);
         pl.ani.move(movement * frameTime.asSeconds());
         
         if(updatingLevel){
             if(drawinit){
-                levelManger.updateLevel(currentLevel, window, frameTime, hoodieAn);
+                // std::cout<< "Drawing level" << std::endl;
+                //levelManger.updateLevel(currentLevel, window, frameTime, am);
             }
             else{
-                levelManger.updateLevel(currentLevel, window, frameTime, hoodieAn);
+                //levelManger.updateLevel(currentLevel, window, frameTime, am);
                 drawinit = true;
             }
             
